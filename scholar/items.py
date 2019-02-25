@@ -5,10 +5,10 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item, Field
 
-
-class ScholarItem(scrapy.Item):
+class ScholarItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    title = Field() 
+    url = Field()
