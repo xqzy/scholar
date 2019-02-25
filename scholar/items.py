@@ -11,4 +11,7 @@ class ScholarItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = Field() 
-    url = Field()
+    link = Field()
+    pubDate = Field()
+    description = Field()
+

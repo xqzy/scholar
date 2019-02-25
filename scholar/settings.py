@@ -91,6 +91,6 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {'scholar.pipelines.ScholarPipeline':300}
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGODB_DB = "scholar"
-MONGODB_COLLECTION = "articles"
+MONGODB_DB = "test"
+MONGODB_COLLECTION = "scholar"
 

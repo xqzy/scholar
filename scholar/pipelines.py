@@ -17,7 +17,7 @@ class ScholarPipeline(object):
 		settings['MONGODB_PORT']
 	)
 	db=connection[settings['MONGODB_DB']]
-	self.connection = db[settings['MONGODB_COLLECTION']]		
+	self.collection = db[settings['MONGODB_COLLECTION']]		
 
 
     def process_item(self, item, spider):
