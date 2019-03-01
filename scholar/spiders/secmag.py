@@ -16,4 +16,5 @@ class Spider(XMLFeedSpider):
         item['link'] = node.xpath('link/text()').extract_first()
         item['pubDate'] = node.xpath('link/pubDate/text()').extract_first()
         item['description'] = node.xpath('description/text()').extract_first()                #define XPath for description
+	item['score'] = 0
         yield item
