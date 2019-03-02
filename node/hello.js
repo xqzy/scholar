@@ -29,4 +29,6 @@ app.route('/articles').get(function(req, res) {
        );
    });
 });
-var server = app.listen(8080, function() { });
+var server = app.listen(8080, function() {
+  console.log(`Express running → PORT ${server.address().port}`);
+ });
