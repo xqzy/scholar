@@ -13,7 +13,7 @@ app.route('/articles').get(function(req, res) {
        var cursor = collection.find({});
        str = "";
        str = str + "<table> <tr> <th> link </th>";
-       str = str + "<tr> <th> score  </th>";
+       str = str + "<tr> <th> scores  </th>";
        str = str + "<th> description </th></tr>";
                     
        cursor.forEach(function(item) {
@@ -32,7 +32,11 @@ app.route('/articles').get(function(req, res) {
 app.set('view engine', 'pug');
 // serve static files from the 'public' folder
 app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/views'));
 
+app.set('views', __dirname + '/views');
+
+// app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/', (req, res) => {
    res.render('index', {
      title: 'Homepage',
