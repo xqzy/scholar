@@ -5,5 +5,6 @@ nvm install v10.15.1
 npm i -g pm2@2.4.3
 npm install express
 npm install mongodb
+npm install pug
 pm2 start ~/Code/scholar/node/hello.js
 :

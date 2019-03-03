@@ -29,6 +29,15 @@ app.route('/articles').get(function(req, res) {
        );
    });
 });
+app.set('view engine', 'pug');
+// serve static files from the 'public' folder
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', (req, res) => {
+   res.render('index', {
+     title: 'Homepage',
+  });
+});
 var server = app.listen(8080, function() {
   console.log(`Express running → PORT ${server.address().port}`);
  });
