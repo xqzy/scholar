@@ -14,4 +14,5 @@ class ScholarItem(Item):
     link = Field()
     pubDate = Field()
     description = Field()
+    score = Field()
 

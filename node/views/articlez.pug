@@ -1,0 +1,16 @@
+extends default
+
+block content
+  div.container
+
+  table
+    thead
+      tr: th Posts
+        - var i=0;
+        tbody
+          each item, i in articlelist
+            tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              td=item.score
+              td
+                a(href=item.link) link 
+              td #{item.description}
