@@ -4,6 +4,18 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost/test';
 var str = "";
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 app.route('/articles').get(function(req, res) {
    console.log("starting nodejs code ");
    MongoClient.connect(url, function(err, client) {
@@ -60,14 +72,22 @@ app.get('/articlez', (req, res) => {
         console.log('Connection established to', url);
         const db = client.db('test');
         var articlecollection = db.collection('scholar');
-
+        function compare (a, b) {
+          if (a.pubDate >  b.pubDate) {
+	    comparison = 1;
+	  } else if (a.pubDate < b.pubDate) {
+	    comparison = -1;
+          }
+          comparison = comparison * -1;
+	  return comparison
+        }
         // Find all articles
         articlecollection.find({}).toArray(function(err, articleResult) {
           if (err) {
               res.send(err);
           } else if (articleResult.length) {
               res.render('articlez', {
-                  'articlelist': articleResult,
+                  'articlelist': articleResult.sort(compare),
                   title: 'Articles',
               });
           } else {
@@ -93,6 +113,24 @@ app.get('/dbadmin', (req, res) => {
         });
    res.render('dbadmin', {
      title: 'dbadmin',
+  });
+});
+
+// app.locals.basedir = '/home/ec2-user/Code/scholar/node';
+app.get('/deletearticles', (req, res) => {
+  const exec = require('child_process').exec;
+  var retstr = "successfull";
+  var yourscript = exec('/home/ec2-user/Code/scholar/scripts/mongo_delete_all_articles.sh',
+        (error, stdout, stderr) => {
+            console.log(`${stdout}`);
+            console.log(`${stderr}`);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+                retstr = "error";
+            }
+        });
+   res.render('deleterecords', {
+     title: 'deleterecords' + retstr,
   });
 });
 

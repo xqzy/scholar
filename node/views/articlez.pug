@@ -5,12 +5,17 @@ block content
 
   table
     thead
-      tr: th Posts
+        tr
+          th Posts
+          th Date 
+          th link
+          th description
         - var i=0;
         tbody
           each item, i in articlelist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
               td=item.score
+              td=item.pubDate
               td
                 a(href=item.link) link 
               td #{item.description}
