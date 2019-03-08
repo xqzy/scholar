@@ -75,19 +75,47 @@ app.get('/articlez', (req, res) => {
         function compare (a, b) {
           if (a.pubDate >  b.pubDate) {
 	    comparison = 1;
-	  } else if (a.pubDate < b.pubDate) {
+	  } else  {
 	    comparison = -1;
           }
           comparison = comparison * -1;
 	  return comparison
+        }
+           
+        // fetch url to see whether there was a commond
+        //
+        // res.send(req.query.cmd);
+        if (req.query.cmd == "hd") {
+           // convert string to objectid for mongo
+           var refid = require('mongodb').ObjectID(req.query.id); 
+           articlecollection.findOneAndUpdate(
+             {_id:refid},  // query to find the record
+             {$set:{show:"0"}},    // update command
+             {},                  // options 
+             function(err, object){
+               if(err){
+                 console.log('error in iupdate functin');
+                 console.warn(err.message);  // return err mess
+               }else{
+                 console.log(' object infomration below: ' , req.query.id);
+                 console.dir(object);
+               }
+             });
+           console.log('update: ',req.query.id, req.query.cmd); 
         }
         // Find all articles
         articlecollection.find({}).toArray(function(err, articleResult) {
           if (err) {
               res.send(err);
           } else if (articleResult.length) {
+              var fltrArticleResult = articleResult.filter(function(obj){
+                 if((obj.show) == 1) {
+                   return true;
+                 }
+                 return false;
+              });
               res.render('articlez', {
-                  'articlelist': articleResult.sort(compare),
+                  'articlelist': fltrArticleResult.sort(compare),
                   title: 'Articles',
               });
           } else {

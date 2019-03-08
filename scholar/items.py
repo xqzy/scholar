@@ -15,4 +15,5 @@ class ScholarItem(Item):
     pubDate = Field()
     description = Field()
     score = Field()
+    show = Field()
 
