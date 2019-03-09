@@ -73,7 +73,7 @@ app.get('/articlez', (req, res) => {
         const db = client.db('test');
         var articlecollection = db.collection('scholar');
         function compare (a, b) {
-          if (a.pubDate >  b.pubDate) {
+          if (a.score >  b.score) {
 	    comparison = 1;
 	  } else  {
 	    comparison = -1;
@@ -174,6 +174,21 @@ app.get('/getarticles', (req, res) => {
         });
    res.render('getarticles', {
      title: 'getarticles',
+  });
+});
+
+app.get('/recommend', (req, res) => {
+  const exec = require('child_process').exec;
+  var yourscript = exec('/home/ec2-user/Code/scholar/scholar/recommend.py',
+        (error, stdout, stderr) => {
+            console.log(`${stdout}`);
+            console.log(`${stderr}`);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+            }
+        });
+   res.render('recommend', {
+     title: 'recommend',
   });
 });
 

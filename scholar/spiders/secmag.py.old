@@ -6,9 +6,9 @@ import datetime
 class Spider(XMLFeedSpider):
     name = "secmag"
     allowed_domains = ["securitymagazine.com"]
-    start_urls = ['https://www.securitymagazine.com/rss/topic/2246-banking-finance-insurance',
-                  'https://www.securitymagazine.com/rss/15',
-                   ]    #Crawl BPMX
+    start_urls = ('https://www.securitymagazine.com/rss/topic/2246-banking-finance-insurance',
+                  'https://www.securitymagazine.com/rss/',
+                   )    #Crawl BPMX
     itertag = 'item'
 
     def parse_node(self, response, node):

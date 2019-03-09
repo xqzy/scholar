@@ -6,6 +6,7 @@ block content
   table
     thead
         tr
+          th Source
           th Show
           th Score
           th Date 
@@ -15,10 +16,11 @@ block content
         tbody
           each item, i in articlelist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              td=item.source
               td
                 a(href=`/articlez?cmd=hd&id=${item._id}`) #{item.show}
               td=item.score
               td=item.pubDate
               td
-                a(href=item.link) link 
+                a(href=item.link target="_blank") link 
               td #{item.description}
