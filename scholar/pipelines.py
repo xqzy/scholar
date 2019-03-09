@@ -27,8 +27,14 @@ class ScholarPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            self.collection.insert(dict(item))
-            log.msg("Question added to MongoDB database!",
+            myquery = {"title": item['title']}
+            rsults = self.collection.find(myquery)
+            if rsults.count() == 0:      
+              self.collection.insert(dict(item))
+              log.msg("Article added to MongoDB database!",
+                    level=log.DEBUG, spider=spider)
+            else:
+               log.msg("Duplicate article : not added:"+item['title'],
                     level=log.DEBUG, spider=spider)
         return item
 
