@@ -18,6 +18,7 @@ articlecol = db[settings['MONGODB_COLLECTION']]
 searchwords = [ { 'match': 'ATM', 'score': 12 },
                 { 'match': 'PCI', 'score': 12 },
                 { 'match': 'debit', 'score': 12 },
+                { 'match': 'credit card', 'score': 12 },
                 { 'match': 'bank', 'score': 12 }
               ]
 

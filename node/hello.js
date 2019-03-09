@@ -164,7 +164,7 @@ app.get('/deletearticles', (req, res) => {
 
 app.get('/getarticles', (req, res) => {
   const exec = require('child_process').exec;
-  var yourscript = exec('cd /home/ec2-user/Code/scholar && scrapy crawl secmag',
+  var yourscript = exec('/home/ec2-user/Code/scholar/scripts/get_articles.sh',
         (error, stdout, stderr) => {
             console.log(`${stdout}`);
             console.log(`${stderr}`);
