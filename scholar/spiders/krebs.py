@@ -25,7 +25,8 @@ class Spider(XMLFeedSpider):
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')
         item['description'] = node.xpath('description/text()').extract_first()                #define XPath for description
-	item['score'] = 0
-	item['show'] = 1
-	item['source'] = "Krebs " 
+        item['score'] = 0
+        item['show'] = 1
+        item['source'] = "Krebs " 
+        item['like'] = 0
         yield item

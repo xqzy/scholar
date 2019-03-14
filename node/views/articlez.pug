@@ -8,6 +8,7 @@ block content
         tr
           th Source
           th Show
+          th Like
           th Score
           th Date 
           th link
@@ -19,6 +20,8 @@ block content
               td=item.source
               td
                 a(href=`/articlez?cmd=hd&id=${item._id}`) #{item.show}
+              td
+                a(href=`/articlez?cmd=lk&id=${item._id}`) #{item.like}
               td=item.score
               td=item.pubDate
               td

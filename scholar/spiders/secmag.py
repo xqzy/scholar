@@ -12,7 +12,7 @@ class Spider(XMLFeedSpider):
     itertag = 'item'
 
     def parse_node(self, response, node):
-        self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
+        # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
 
         item = ScholarItem() 
         item['title'] = node.xpath('title/text()',).extract_first()                #define XPath for title
@@ -26,7 +26,8 @@ class Spider(XMLFeedSpider):
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')
         item['description'] = node.xpath('description/text()').extract_first()                #define XPath for description
-	item['score'] = 0
-	item['show'] = 1
-	item['source'] = "Security Magazine" 
+        item['score'] = 0
+        item['show'] = 1
+        item['source'] = "Security Magazine" 
+        item['like'] = 0
         yield item

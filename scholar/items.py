@@ -17,4 +17,6 @@ class ScholarItem(Item):
     score = Field()
     show = Field()
     source = Field()
+    like = Field()
+    
 
