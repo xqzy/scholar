@@ -12,6 +12,7 @@ block content
           th Score
           th Date 
           th link
+          th title
           th description
         - var i=0;
         tbody
@@ -26,4 +27,5 @@ block content
               td=item.pubDate
               td
                 a(href=item.link target="_blank") link 
+              td #{item.title}
               td #{item.description}
