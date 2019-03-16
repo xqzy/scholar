@@ -1,17 +1,18 @@
 extends default
 
-block content
-  div.container
 
+block content
+  
+  div.container
+  
   table
+    
     thead
         tr
           th Source
-          th Show
-          th Like
+          th 
           th Score
           th Date 
-          th link
           th title
           th description
         - var i=0;
@@ -19,13 +20,16 @@ block content
           each item, i in articlelist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
               td=item.source
-              td
-                a(href=`/articlez?cmd=hd&id=${item._id}`) #{item.show}
-              td
-                a(href=`/articlez?cmd=lk&id=${item._id}`) #{item.like}
+              td(width='4%')
+                a(href=`/articlez?cmd=hd&id=${item._id}`) 
+                  i.fa.fa-trash          
+                a(href=`/articlez?cmd=lk&id=${item._id}`) 
+                  if (item.like == 1)
+                    i.fa.fa-heart
+                  else
+                    i.fa.fa-heart-o
               td=item.score
               td=item.pubDate
-              td
-                a(href=item.link target="_blank") link 
-              td #{item.title}
+              td(width='20%')
+                a(href=item.link target="_blank") #{item.title}
               td #{item.description}

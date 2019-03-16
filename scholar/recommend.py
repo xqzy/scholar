@@ -19,16 +19,25 @@ searchwords = [ { 'match': 'ATM', 'score': 12 },
                 { 'match': 'PCI', 'score': 12 },
                 { 'match': 'debit', 'score': 12 },
                 { 'match': 'credit card', 'score': 12 },
-                { 'match': 'bank', 'score': 12 }
+                { 'match': 'PIN', 'score': 12 },
+                { 'match': 'bank', 'score': 12 },
+                { 'match': '[bB]ank', 'score': 12 },
+                { 'match': 'risk management', 'score': 12 },
+                { 'match': '[Ff]inancial [Ss]ervices', 'score': 12 }
               ]
 
 articles = articlecol.find()
 for article in articles:
-   score = 12
+   score = 100
    for sw in searchwords:
+     # analyse description of article
      res = re.search(sw["match"], article["description"])
      if (res):
        score += sw["score"]
+     # analyse title of article
+     res = re.search(sw["match"], article["title"])
+     if (res):
+       score += 2*sw["score"]
 	
    articlecol.update_one(
      { "_id": article["_id"]},
