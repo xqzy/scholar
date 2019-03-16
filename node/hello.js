@@ -148,18 +148,53 @@ app.get('/articlez', (req, res) => {
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/dbadmin', (req, res) => {
+	
   const exec = require('child_process').exec;
-  var yourscript = exec('/home/ec2-user/Code/scholar/scripts/import-db.sh',
-        (error, stdout, stderr) => {
-            console.log(`${stdout}`);
-            console.log(`${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        });
-   res.render('dbadmin', {
-     title: 'dbadmin',
-  });
+  
+  //fetch url to determine commond
+  //
+  // res.send(req.query.cmd);
+  var retstr = "";
+  var title = "database admin menu";
+  if (req.query.cmd == "ipdb") {
+     // import database from S3 bucket.
+	  retstr="";
+	  const {spawn} =require('child_process');
+	  const impcmd = spawn ('/home/ec2-user/Code/scholar/scripts/import-db.sh');
+	  impcmd.stdout.on('data', (data) => {
+		  retstr = retstr + `${data}`;
+	  });
+	  impcmd.on('exit', function(code, signal) {  
+		      console.log('ok rob, value of retstr : \n %s  \n End of retstr \n', retstr);
+		      res.render('dbadmin', {
+		          title: title,
+		          messge : retstr 
+		      });
+	  });
+  }
+  else if (req.query.cmd == "budb") {
+	  // backup database to s3 bucket.
+	  retstr="";
+	  const {spawn} =require('child_process');
+	  const bupcmd = spawn ('/home/ec2-user/Code/scholar/scripts/export-db.sh');
+	  bupcmd.stdout.on('data', (data) => {
+		  retstr = retstr + `${data}`;
+	  });
+	  bupcmd.on('exit', function(code, signal) {  
+		      console.log('ok rob, value of retstr : \n %s  \n End of retstr \n', retstr);
+		      res.render('dbadmin', {
+		          title: title,
+		          messge : retstr 
+		      });
+	  });
+  }
+  else {
+	  retstr = "Please make your choice... ";
+      res.render('dbadmin', {
+          title: title,
+          messge : retstr 
+      });
+  };
 });
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
@@ -180,18 +215,26 @@ app.get('/deletearticles', (req, res) => {
   });
 });
 
+// 16/3/19
+// revision as per issue #11: change exec in spawn child process as spawn better deals with large output from
+// child process
+
 app.get('/getarticles', (req, res) => {
-  const exec = require('child_process').exec;
-  var yourscript = exec('/home/ec2-user/Code/scholar/scripts/get_articles.sh',
-        (error, stdout, stderr) => {
-            console.log(`${stdout}`);
-            console.log(`${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        });
-   res.render('getarticles', {
-     title: 'getarticles',
+  const {spawn} = require('child_process');
+  const getartscmd = spawn('/home/ec2-user/Code/scholar/scripts/get_articles.sh');
+  getartscmd.stdout.on('data', (data) => {
+	  console.log(`get_articles.sh  stdout:\n${data}`);
+  });
+
+  getartscmd.stderr.on('data', (data) => {
+	  console.error(`get_articles.sh stderr:\n${data}`);
+  });
+  getartscmd.on('exit', function (code, signal) {
+	  console.log('getartscmd process exited with ' +
+	              `code ${code} and signal ${signal}`);
+  });
+  res.render('getarticles', {
+   title: 'getarticles',
   });
 });
 

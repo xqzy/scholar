@@ -2,6 +2,19 @@ extends default
 
 block content
   div.container
+  
+    a(href="articles")
+      button(type=button) articles
+    a(href="/dbadmin?cmd=budb")
+      button(type=button) back-up database
+    a(href="/dbadmin?cmd=ipdb")
+      button(type=button) import database
+  		  
+    p Hello there
+    p #{messge} 
+    p end of message
+    p #{title}
 
-  a(href="articles")
-    button(type=button) articles
+    
+    
+    
