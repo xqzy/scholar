@@ -13,7 +13,7 @@ hooks:
       timeout: 300 
       runas: root 
   ApplicationStart:
-    - location: scripts/ls
+    - location: pm2 start hello
       timeout: 300
       runas: root
   ApplicationStop:
