@@ -18,4 +18,4 @@ artifacts:
     - etc/yum.repos.d/mongodb-org-4.0.repo
     - buildspec.yml
     - appspec.yml
-    - scripts/ls
+    - scripts/*
