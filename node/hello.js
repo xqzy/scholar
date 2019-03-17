@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost/test';
+
+var aboutPage = require('./routes/about.js');
 var str = "";
 
 // edited from own workstation -> eclipse
@@ -16,6 +18,12 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
+
+app.set('view engine', 'pug');
+
+app.route('/about').get(function(req, res) {
+	aboutPage.getAboutPage(req, res);
+});
 
 app.route('/articles').get(function(req, res) {
    console.log("starting nodejs code ");
