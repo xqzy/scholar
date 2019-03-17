@@ -1,0 +1,23 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/Code/scholar
+hooks:
+  BeforeInstall:
+    - location: 
+      timeout: 
+      runas: 
+  AfterInstall:
+    - location: 
+      timeout: 
+      runas: 
+  ApplicationStart:
+    - location: 
+    - location: 
+      timeout: 
+      runas: 
+  ApplicationStop:
+    - location: 
+      timeout: 
+      runas: 
