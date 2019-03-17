@@ -9,12 +9,12 @@ hooks:
       timeout: 300 
       runas: root 
   AfterInstall:
-    - location:  ls
+    - location: ls
       timeout: 300 
       runas: root 
   ApplicationStart:
     - location: ls
-      timeout:  300
+      timeout: 300
       runas: root
   ApplicationStop:
     - location: ls 
