@@ -13,3 +13,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+artifacts:
+  files:
+    -  etc/yum.repos.d/mongodb-org-4.0.repo
