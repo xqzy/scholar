@@ -5,19 +5,18 @@ files:
     destination: /home/ec2-user/Code/scholar
 hooks:
   BeforeInstall:
-    - location: 
-      timeout: 
-      runas: 
+    - location: ls
+      timeout: 300 
+      runas: root 
   AfterInstall:
-    - location: 
-      timeout: 
-      runas: 
+    - location:  ls
+      timeout: 300 
+      runas: root 
   ApplicationStart:
-    - location: 
-    - location: 
-      timeout: 
-      runas: 
+    - location: ls
+      timeout:  300
+      runas: root
   ApplicationStop:
-    - location: 
-      timeout: 
-      runas: 
+    - location: ls 
+      timeout: 300 
+      runas: root 
