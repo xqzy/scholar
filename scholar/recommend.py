@@ -8,10 +8,13 @@ import re
 from scrapy.conf import settings
 from scrapy import log
 
-connection = pymongo.MongoClient(
-  settings['MONGODB_SERVER'],
-  settings['MONGODB_PORT']
-)
+try:
+    connection = pymongo.MongoClient(
+      settings['MONGODB_SERVER'],
+      settings['MONGODB_PORT']
+    )
+except pymongo.errors.ConnectionFailure, e:
+    print "Could not connect to database: %s " % e
 db=connection[settings['MONGODB_DB']]
 articlecol = db[settings['MONGODB_COLLECTION']]		
 
@@ -27,7 +30,11 @@ searchwords = [ { 'match': 'ATM', 'score': 12 },
               ]
 
 articles = articlecol.find()
+print "number of records found: ", articles.count()
+teller = 0
 for article in articles:
+   teller += 1;
+#    print "teller {teller}", teller;
    score = 100
    for sw in searchwords:
      # analyse description of article
