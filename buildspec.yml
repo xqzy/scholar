@@ -13,6 +13,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Starting tests on `date`
+      - cd /home/ec2-user/Code/scholar/node && mocha tests\
+      - echo Finished  tests on `date`
 artifacts:
   files:
     - '**/*'
