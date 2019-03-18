@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+      - echo Starting Mocha
+      - cd /home/ec2-user/Code/scholar/node && mocha tests/
+artifacts:
+  files:
+    - '**/*'
