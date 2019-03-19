@@ -5,7 +5,7 @@ files:
     destination: /home/ec2-user/Code/scholar
 hooks:
   BeforeInstall:
-    - location: /usr/bin/rm -rf /home/ec2-user/Code/scholar
+    - location: scripts/remove_all_code
       timeout: 300 
       runas: root 
   AfterInstall:
