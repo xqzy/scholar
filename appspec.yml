@@ -5,7 +5,7 @@ files:
     destination: /home/ec2-user/Code/scholar
 hooks:
   BeforeInstall:
-    - location: scripts/ls
+    - location: /usr/bin/rm -rf /home/ec2-user/Code/scholar
       timeout: 300 
       runas: root 
   AfterInstall:
