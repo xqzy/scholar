@@ -1,0 +1,32 @@
+changed dir
+included nvm.sh 
+
+
+  smoke test
+    ✓ checks equality
+
+  Front end page
+    ✓ landing page exists
+
+  Main Article page 
+    ✓ article page exists
+
+
+  3 passing (35ms)
+
+changed dir
+included nvm.sh 
+
+
+  smoke test
+    ✓ checks equality
+
+  Front end page
+    ✓ landing page exists
+
+  Main Article page 
+    ✓ article page exists
+
+
+  3 passing (33ms)
+
