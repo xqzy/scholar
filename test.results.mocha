@@ -1,7 +1,7 @@
-starting mocha tests
-wo 20 mrt 2019 22:23:09 UTC
-changed dir
-included nvm.sh 
+TEST SCRIPT starting mocha tests
+wo 20 mrt 2019 22:27:28 UTC
+TEST SCRIPT changed dir
+TEST SCRIPT included nvm.sh 
 
 
   smoke test
@@ -14,5 +14,5 @@ included nvm.sh
     ✓ article page exists
 
 
-  3 passing (35ms)
+  3 passing (34ms)
 
