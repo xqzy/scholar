@@ -1,4 +1,5 @@
 #!/bin/sh
 echo "starting mocha tests"
 cd /home/ec2-user/Code/scholar/node
+. /home/ec2-user/.nvm/nvm.sh
 mocha tests/ > test.results.mocha
