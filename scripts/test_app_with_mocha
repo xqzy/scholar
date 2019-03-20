@@ -5,4 +5,4 @@ echo "TEST SCRIPT starting mocha tests" > $OUTFILE
 date >> $OUTFILE
 cd /home/ec2-user/Code/scholar/node && echo "TEST SCRIPT changed dir" >> $OUTFILE
 . /home/ec2-user/.nvm/nvm.sh && echo "TEST SCRIPT included nvm.sh " >> $OUTFILE
-mocha tests/ >> $OUTFILE
+mocha tests/ >> $OUTFILE && exit 0
