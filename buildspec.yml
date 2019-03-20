@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Starting tests on `date`
-      - scripts/test_app_with_mocha tests/ > test.results.mocha
+      - scripts/test_app_with_mocha
       - echo Finished  tests on `date`
 artifacts:
   files:
