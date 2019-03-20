@@ -14,6 +14,7 @@ hooks:
       runas: root 
   ApplicationStart:
     - location: scripts/start-app.sh
+    - location: node/mocha tests/ > mocha.testreport
       timeout: 300
       runas: root
   ApplicationStop:
