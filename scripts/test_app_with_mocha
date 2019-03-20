@@ -1,5 +1,6 @@
 #!/bin/sh
-echo "starting mocha tests" > test.results.mocha
-cd /home/ec2-user/Code/scholar/node && echo "changed dir" >> test.results.mocha
-. /home/ec2-user/.nvm/nvm.sh && echo "included nvm.sh " >> test.results.mocha
-mocha tests/ >> test.results.mocha
+OUTFILE = "~/Code/scholar/test.results.mocha"
+echo "starting mocha tests" > $OUTFILE
+cd /home/ec2-user/Code/scholar/node && echo "changed dir" >> $OUTFILE
+. /home/ec2-user/.nvm/nvm.sh && echo "included nvm.sh " >> $OUTFILE
+mocha tests/ >> $OUTFILE
