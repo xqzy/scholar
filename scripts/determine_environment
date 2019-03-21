@@ -1,0 +1,7 @@
+export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}'`" 
+if [ -z "$ENV" ]
+then
+	ENV="DEV"
+fi
+echo Current environment is $ENV
+echo $ENV > /tmp/env
