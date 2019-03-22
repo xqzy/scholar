@@ -1,15 +1,17 @@
-use 'strict';
+// use 'strict';
 
 // obtain the environment variable to determine whether this is prod/test/dev
 var env = process.env.ENV || 'DEV';
-var config = require(`conf/${env}`);
+var config = require(`./config/${env}`);
 module.exports = config;
 
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost/test';
+var url = config.db;
+var dbname = config.db.split("/")[3];
 
+console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
 var str = "";
 
@@ -36,7 +38,7 @@ app.route('/articles').get(function(req, res) {
    console.log("starting nodejs code ");
    MongoClient.connect(url, function(err, client) {
        console.log("connection ok");
-       const db = client.db('test');
+       const db = client.db(`${dbname}`);
        var collection = db.collection('scholar');
        var cursor = collection.find({});
        str = "";
@@ -86,7 +88,7 @@ app.get('/articlez', (req, res) => {
         console.log('Unable to connect to the Server', err);
     } else {
         console.log('Connection established to', url);
-        const db = client.db('test');
+        const db = client.db(`${dbname}`);
         var articlecollection = db.collection('scholar');
         function compare (a, b) {
           if (a.score >  b.score) {

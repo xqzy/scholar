@@ -18,7 +18,7 @@ then
   ./mongo_delete_all_articles.sh
   mongoimport --db $DB  --collection scholar --type json --file /tmp/scholar.json
 
-  echo "database imported"
+  echo "database $DB imported"
 else
   echo "database not imported, environment value not set (in tag ec2 instance"
 fi
