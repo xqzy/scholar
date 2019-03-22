@@ -5,7 +5,7 @@
   "main": "hello.js",
   "scripts": {
     "start": "npx pm2 start hello.js --watch",
-    "test":  "mocha tests/**/*.js"
+    "test":  "mocha"
   },
   "author": "Ayo Isaiah",
   "license": "MIT",
