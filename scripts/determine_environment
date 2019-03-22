@@ -5,3 +5,4 @@ then
 fi
 echo Current environment is $ENV
 echo $ENV > /tmp/env
+echo export ENV="$ENV"  >> /etc/profile

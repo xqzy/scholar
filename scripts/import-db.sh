@@ -1,5 +1,4 @@
 echo "########## starting import_db.sh ####" `date`
-. ./determine_environment
 if [ "$ENV" == "TEST" ] 
 then
   BUCKET="thirtyfourtest"

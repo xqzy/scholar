@@ -1,3 +1,10 @@
+use 'strict';
+
+// obtain the environment variable to determine whether this is prod/test/dev
+var env = process.env.ENV || 'DEV';
+var config = require(`conf/${env}`);
+module.exports = config;
+
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;

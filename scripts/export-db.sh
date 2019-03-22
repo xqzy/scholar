@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Starting backup" 
+ 
 . ./determine_environment
 
 if [ "$ENV" == "TEST" ]
