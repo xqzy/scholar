@@ -12,6 +12,15 @@ then
   DB="dev"
 fi
 
+if [ "$ENV" == "TEST" ]
+then
+  if [ ! -f /tmp/fdbimp ]
+  then
+    aws s3 cp s3://$BUCKET/scholar.json.ref s3://$BUCKET/scholar.json
+    echo " reference test database restored at " `date` >> /tmp/fdbimp 
+  fi  
+fi
+
 if [ "$ENV" == "DEV" -o "$ENV" == "TEST" ] 
 then
   aws s3 cp s3://$BUCKET/scholar.json /tmp/scholar.json
