@@ -9,6 +9,7 @@ phases:
       - npm install chai-http --save-dev
       - npm -g install pm2
       - npm -g install pug
+      - npm -g install express
   pre_build:
     commands:
       - npm install
