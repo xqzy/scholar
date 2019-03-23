@@ -14,10 +14,7 @@ phases:
   post_build:
     run-as: ec2-user
     commands:
-      - echo Build completed on `date`
-      - echo Starting tests on `date`
       - npm test >> ~/Code/scholar/test.results.mocha
-      - echo Finished  tests on `date`
 artifacts:
   files:
     - '**/*'
