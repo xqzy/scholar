@@ -10,6 +10,7 @@ phases:
       - npm -g install pm2
       - npm install pug --save-dev
       - npm install express --save-dev
+      - npm install should --save-dev
   pre_build:
     commands:
       - npm install
