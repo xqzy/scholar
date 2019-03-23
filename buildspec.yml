@@ -11,10 +11,10 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - /home/ec2-user/Code/scholar/scripts/test_app_with_mocha
   post_build:
-    run-as: ec2-user
     commands:
-      - npm test 
+      - echo Nothing to do postbuild
 artifacts:
   files:
     - '**/*'
