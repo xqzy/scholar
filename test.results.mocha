@@ -1,7 +1,11 @@
 TEST SCRIPT starting mocha tests
-Wed Mar 20 22:34:11 UTC 2019
+Sat Mar 23 00:40:56 UTC 2019
 TEST SCRIPT changed dir
 TEST SCRIPT included nvm.sh 
+
+> simple-node-website@0.1.0 test /home/ec2-user/Code/scholar/node
+> mocha
+
 
 
   smoke test
@@ -13,6 +17,24 @@ TEST SCRIPT included nvm.sh
   Main Article page 
     ✓ article page exists
 
+  Deprecated Article page 
+    ✓ article page exists
 
-  3 passing (34ms)
+  Maintenance page 
+    ✓ maintenance page exists
+
+  Database Admin page 
+    ✓ dbadmin page exists
+
+  Delete Articles page 
+    ✓ Deleta Articles page exists
+
+  Get Articles page 
+    ✓ Get Articles page exists
+
+  Recommend page 
+    ✓ Recommend page exists
+
+
+  9 passing (45ms)
 

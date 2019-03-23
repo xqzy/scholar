@@ -36,15 +36,15 @@ describe('Main Article page ', function(){
 });
 
 describe('Deprecated Article page ', function(){
-	  it('article page exists', function(){
-	    chai.request('http://localhost:8080')
-	    .get('/articles')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-	    });
-	  });
+  it('article page exists', function(){
+    chai.request('http://localhost:8080')
+	.get('/articles')
+	.end(function(err, res) {
+	  res.should.have.status(200);
+	  res.should.be.html;
 	});
+  });
+});
 
 describe('Maintenance page ', function(){
 	  it('maintenance page exists', function(){
