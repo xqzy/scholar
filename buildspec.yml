@@ -14,7 +14,7 @@ phases:
   post_build:
     run-as: ec2-user
     commands:
-      - npm test >> ~/Code/scholar/test.results.mocha
+      - npm test 
 artifacts:
   files:
     - '**/*'
