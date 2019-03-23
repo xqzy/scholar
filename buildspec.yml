@@ -11,7 +11,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - /home/ec2-user/Code/scholar/scripts/test_app_with_mocha
+      - /bin/bash /home/ec2-user/Code/scholar/scripts/test_app_with_mocha
   post_build:
     commands:
       - echo Nothing to do postbuild
