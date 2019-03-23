@@ -16,9 +16,8 @@ phases:
       - npm install
   build:
     commands:
-      - pm2 start node/hello.js
       - echo Build started on `date`
-      - /bin/bash scripts/test_app_with_mocha
+      - pm2 start node/hello.js &&  /bin/bash scripts/test_app_with_mocha
   post_build:
     commands:
       - echo Nothing to do postbuild
