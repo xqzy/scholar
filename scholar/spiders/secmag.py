@@ -1,6 +1,8 @@
 
 from scrapy.spiders import XMLFeedSpider
 from scholar.items import ScholarItem
+from w3lib.html import remove_tags
+
 import datetime
 
 class Spider(XMLFeedSpider):
@@ -25,7 +27,7 @@ class Spider(XMLFeedSpider):
         date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S')
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')
-        item['description'] = node.xpath('description/text()').extract_first()                #define XPath for description
+        item['description'] = remove_tags(node.xpath('description/text()').extract_first())                #define XPath for description
         item['score'] = 0
         item['show'] = 1
         item['source'] = "Security Magazine" 

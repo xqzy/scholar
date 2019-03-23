@@ -1,6 +1,8 @@
 
 from scrapy.spiders import XMLFeedSpider
 from scholar.items import ScholarItem
+from w3lib.html import remove_tags
+
 import datetime
 
 class Spider(XMLFeedSpider):
@@ -21,11 +23,26 @@ class Spider(XMLFeedSpider):
 
     def parse_node(self, response, node):
         # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
-
+        page = response.url
+        
         item = ScholarItem() 
         item['title'] = node.xpath('title/text()',).extract_first()                #define XPath for title
         item['link'] = node.xpath('link/text()').extract_first()
-        date_time_str = node.xpath('pubDate/text()').extract_first()
+        
+        
+        
+        
+        
+        # determine the description. Field is not always gather the same way for all feeds.
+        if (page.find("schneier")>=0): 
+            print "#########################Schneier article found"
+            item['description'] = remove_tags(node.xpath('summary/text()').extract_first()) 
+            date_time_str = node.xpath('published/text()').extract_first()
+        else: 
+            item['description'] = remove_tags(node.xpath('description/text()').extract_first())                #define XPath for description
+            date_time_str = node.xpath('pubDate/text()').extract_first()
+        
+        
         date_time_str = date_time_str.split(" ")
         date_time_str.pop()
         date_time_str = " ".join(date_time_str)
@@ -33,10 +50,10 @@ class Spider(XMLFeedSpider):
         date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S')
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')
-        item['description'] = node.xpath('description/text()').extract_first()                #define XPath for description
+            
         item['score'] = 0
         item['show'] = 1
-        page = response.url
+        
         # self.logger.info('INFO Spider: url is %s', page )
         if (page.find("krebs")>=0): item['source']="Krebs"
         elif (page.find("watchdog")>=0): item['source']="Watchdog"
