@@ -12,10 +12,11 @@ phases:
     commands:
       - echo Build started on `date`
   post_build:
+    run-as: ec2-user
     commands:
       - echo Build completed on `date`
       - echo Starting tests on `date`
-      - /home/ec2-user/Code/scholar/scripts/test_app_with_mocha
+      - npm test >> ~/Code/scholar/test.results.mocha
       - echo Finished  tests on `date`
 artifacts:
   files:
