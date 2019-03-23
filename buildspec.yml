@@ -5,6 +5,10 @@ phases:
     commands:
       - echo installing mocha
       - npm -g install mocha
+      - npm -g install chai
+      - npm -g install chai-http
+      - npm -g install pm2
+      - npm -g install pug
   pre_build:
     commands:
       - npm install
