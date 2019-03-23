@@ -1,8 +1,8 @@
 #!/bin/sh
-OUTFILE="/home/ec2-user/Code/scholar/test.results.mocha"
+OUTFILE="test.results.mocha"
 /usr/bin/touch $OUTFILE
 echo "TEST SCRIPT starting mocha tests" > $OUTFILE
 /bin/date >> $OUTFILE
-cd /home/ec2-user/Code/scholar/node && echo "TEST SCRIPT changed dir" >> $OUTFILE
-. /home/ec2-user/.nvm/nvm.sh && echo "TEST SCRIPT included nvm.sh " >> $OUTFILE
+cd node && echo "TEST SCRIPT changed dir" >> $OUTFILE
+# . /home/ec2-user/.nvm/nvm.sh && echo "TEST SCRIPT included nvm.sh " >> $OUTFILE
 npm test >> $OUTFILE && exit 0
