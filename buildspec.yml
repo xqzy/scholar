@@ -3,6 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo installing mongo
+      - yum install -y mongodb-org
+      - service mongod start && su - ec2-user -c "/home/ec2-user/Code/scholar/scripts/import-db.sh"
+      - echo installing npm
+      - npm install
       - echo installing mocha
       - npm -g install mocha
       - npm install chai --save-dev
@@ -13,7 +18,7 @@ phases:
       - npm install should --save-dev
   pre_build:
     commands:
-      - npm install
+      - echo not much more to do....
   build:
     commands:
       - echo Build started on `date`
