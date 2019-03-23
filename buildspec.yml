@@ -3,7 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Nothing to do in the install phase...
+      - echo installing mocha
+      - npm -g install mocha
   pre_build:
     commands:
       - npm install
