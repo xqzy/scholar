@@ -5,6 +5,8 @@ phases:
     commands:
       - echo installing npm
       - npm install
+      - echo installing serverless
+      - npm -g install serverless
       - echo installing mocha
       - npm -g install mocha
       - npm install chai --save-dev

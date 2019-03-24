@@ -3,8 +3,8 @@ const expect = chai.expect;
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var should = require('chai').should();
-var express = require('express'),
-    app = express();
+var express = require('express');
+const app = require('../hello.js').app;
 
 describe("smoke test", function() {
   it("checks equality", function() {
@@ -14,7 +14,7 @@ describe("smoke test", function() {
 
 describe('Front end page', function(){
   it('landing page exists', function(done){
-    chai.request('http://localhost:8080')
+    chai.request(app)
     .get('/')
     .end(function(err, res) {
       should.exist(res);
@@ -28,7 +28,7 @@ describe('Front end page', function(){
 
 describe('Main Article page ', function(){
   it('article page exists', function(done){
-    chai.request('http://localhost:8080')
+    chai.request(app)
     .get('/articlez')
     .end(function(err, res) {
       res.should.have.status(200);
@@ -40,7 +40,7 @@ describe('Main Article page ', function(){
 
 describe('Deprecated Article page ', function(){
   it('article page exists', function(done){
-    chai.request('http://localhost:8080')
+    chai.request(app)
 	.get('/articles')
 	.end(function(err, res) {
 	  res.should.have.status(200);
@@ -52,7 +52,7 @@ describe('Deprecated Article page ', function(){
 
 describe('Maintenance page ', function(){
 	  it('maintenance page exists', function(done){
-	    chai.request('http://localhost:8080')
+	    chai.request(app)
 	    .get('/maint')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -65,7 +65,7 @@ describe('Maintenance page ', function(){
 
 describe('Database Admin page ', function(){
 	  it('dbadmin page exists', function(done){
-	    chai.request('http://localhost:8080')
+	    chai.request(app)
 	    .get('/dbadmin')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -78,7 +78,7 @@ describe('Database Admin page ', function(){
 
 describe('Delete Articles page ', function(){
 	  it('Deleta Articles page exists', function(done){
-	    chai.request('http://localhost:8080')
+	    chai.request(app)
 	    .get('/deletearticles')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -91,7 +91,7 @@ describe('Delete Articles page ', function(){
 
 describe('Get Articles page ', function(){
 	  it('Get Articles page exists', function(done){
-	    chai.request('http://localhost:8080')
+	    chai.request(app)
 	    .get('/getarticles')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -104,7 +104,7 @@ describe('Get Articles page ', function(){
 
 describe('Recommend page ', function(){
 	  it('Recommend page exists', function(done){
-	    chai.request('http://localhost:8080')
+	    chai.request(app)
 	    .get('/recommend')
 	    .end(function(err, res) {
 	      res.should.have.status(200);

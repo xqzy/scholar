@@ -7,6 +7,8 @@ module.exports = config;
 
 var express = require('express');
 var app = express();
+module.exports - app;
+
 var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
 var dbname = "scholar";
