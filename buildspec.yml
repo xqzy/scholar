@@ -15,6 +15,7 @@ phases:
       - npm install pug --save-dev
       - npm install express --save-dev
       - npm install should --save-dev
+      - npm install mongodb
   pre_build:
     commands:
       - echo not much more to do....
