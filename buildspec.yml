@@ -19,7 +19,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - pm2 start node/hello.js &&  /bin/bash scripts/test_app_with_mocha
+      - pm2 start node/hello.js && cd node && npm test 
   post_build:
     commands:
       - echo Nothing to do postbuild
