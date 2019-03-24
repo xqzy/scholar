@@ -3,9 +3,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo installing mongo
-      - yum install -y mongodb-org
-      - service mongod start && su - ec2-user -c "/home/ec2-user/Code/scholar/scripts/import-db.sh"
       - echo installing npm
       - npm install
       - echo installing mocha
