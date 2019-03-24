@@ -2,6 +2,7 @@
 
 module.exports = {
   env: 'TEST',
-  db:  'mongodb://localhost/test',
+  db:  'mongodb+srv://admin:mike68@scholar-cyx09.mongodb.net/scholar?retryWrites=true',
   port:  process.env.PORT || 4000,
 };
+

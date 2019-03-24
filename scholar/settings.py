@@ -89,8 +89,8 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 ITEM_PIPELINES = {'scholar.pipelines.ScholarPipeline':300}
-MONGODB_SERVER = "localhost"
+MONGODB_SERVER = "mongodb+srv://admin:mike68@scholar-cyx09.mongodb.net/"
 MONGODB_PORT = 27017
-MONGODB_DB = "test"
+MONGODB_DB = "scholar"
 MONGODB_COLLECTION = "scholar"
 

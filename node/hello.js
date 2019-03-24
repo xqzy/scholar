@@ -9,7 +9,7 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
-var dbname = config.db.split("/")[3];
+var dbname = "scholar";
 
 console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
