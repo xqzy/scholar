@@ -28,7 +28,7 @@ describe('Front end page', function(){
 
 describe('Main Article page ', function(){
   it('article page exists', function(done){
-    chai.request(app)
+    chai.request('http://localhost:8080')
     .get('/articlez')
     .end(function(err, res) {
       res.should.have.status(200);
@@ -40,7 +40,7 @@ describe('Main Article page ', function(){
 
 describe('Deprecated Article page ', function(){
   it('article page exists', function(done){
-    chai.request(app)
+    chai.request('http://localhost:8080')
 	.get('/articles')
 	.end(function(err, res) {
 	  res.should.have.status(200);
