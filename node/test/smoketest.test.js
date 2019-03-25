@@ -101,14 +101,14 @@ describe('Get Articles page ', function(){
 	});
 
 
-describe('Recommend page ', function(){
-	  it('Recommend page exists', function(done){
-	    chai.request('http://localhost:8080')
-	    .get('/recommend')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-              done();
-	    });
-	  });
-	});
+//describe('Recommend page ', function(){
+//	  it('Recommend page exists', function(done){
+//	    chai.request('http://localhost:8080')
+//	    .get('/recommend')
+//	    .end(function(err, res) {
+//	      res.should.have.status(200);
+//	      res.should.be.html;
+ //             done();
+////	    });
+//	  });
+//	});
