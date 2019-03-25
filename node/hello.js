@@ -259,7 +259,7 @@ app.get('/getarticles', (req, res) => {
 
 app.get('/recommend', (req, res) => {
   const exec = require('child_process').exec;
-  var yourscript = exec('/home/ec2-user/Code/scholar/scholar/recommend.py',
+  var yourscript = exec('../scholar/recommend.py',
         (error, stdout, stderr) => {
             console.log(`${stdout}`);
             console.log(`${stderr}`);

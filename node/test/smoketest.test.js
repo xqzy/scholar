@@ -4,7 +4,6 @@ var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var should = require('chai').should();
 var express = require('express');
-const app = require('../hello.js').app;
 
 describe("smoke test", function() {
   it("checks equality", function() {
