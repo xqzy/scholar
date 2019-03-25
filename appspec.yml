@@ -14,7 +14,6 @@ hooks:
       runas: root 
   ApplicationStart:
     - location: scripts/start-app.sh
-    - location: scripts/test_app_with_mocha
       timeout: 300
       runas: root
   ApplicationStop:
