@@ -14,7 +14,7 @@ describe("smoke test", function() {
 
 describe('Front end page', function(){
   it('landing page exists', function(done){
-    chai.request(app)
+    chai.request('http://localhost:8080')
     .get('/')
     .end(function(err, res) {
       should.exist(res);
