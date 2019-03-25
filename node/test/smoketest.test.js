@@ -52,7 +52,7 @@ describe('Deprecated Article page ', function(){
 
 describe('Maintenance page ', function(){
 	  it('maintenance page exists', function(done){
-	    chai.request(app)
+	    chai.request('http://localhost:8080')
 	    .get('/maint')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -65,7 +65,7 @@ describe('Maintenance page ', function(){
 
 describe('Database Admin page ', function(){
 	  it('dbadmin page exists', function(done){
-	    chai.request(app)
+	    chai.request('http://localhost:8080')
 	    .get('/dbadmin')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -78,7 +78,7 @@ describe('Database Admin page ', function(){
 
 describe('Delete Articles page ', function(){
 	  it('Deleta Articles page exists', function(done){
-	    chai.request(app)
+	    chai.request('http://localhost:8080' )
 	    .get('/deletearticles')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -91,7 +91,7 @@ describe('Delete Articles page ', function(){
 
 describe('Get Articles page ', function(){
 	  it('Get Articles page exists', function(done){
-	    chai.request(app)
+	    chai.request('http://localhost:8080')
 	    .get('/getarticles')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
@@ -104,7 +104,7 @@ describe('Get Articles page ', function(){
 
 describe('Recommend page ', function(){
 	  it('Recommend page exists', function(done){
-	    chai.request(app)
+	    chai.request('http://localhost:8080')
 	    .get('/recommend')
 	    .end(function(err, res) {
 	      res.should.have.status(200);
