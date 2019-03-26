@@ -1,8 +1,21 @@
+#!/usr/bin/bash
+#
+# script to determine enviroment variable (PROD/TEST/DEV) based on AWS instance tag and set env variable accordingly
+# output is further used to determine database connection and storage location of database backups. 
+#
+# script is called from ec2 launch template from user data
+#
+# TODO -> this doesn't help for serverless environment from where automated test environments run...
+#
+#
+# RS
+# 19-03-26
+#
+
 export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}'`" 
 if [ -z "$ENV" ]
 then
 	ENV="DEV"
 fi
 echo Current environment is $ENV
-echo $ENV > /tmp/env
 echo export ENV="$ENV"  >> /etc/profile

@@ -15,6 +15,8 @@ var dbname = "scholar";
 
 console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
+var articlePage = require('./routes/article.js');
+
 var str = "";
 
 // edited from own workstation -> eclipse
@@ -35,6 +37,11 @@ app.set('view engine', 'pug');
 app.route('/about').get(function(req, res) {
 	aboutPage.getAboutPage(req, res);
 });
+
+app.route('/article').get(function(req,res){
+	articlePage.getArticlePage(req, res);
+});
+
 
 app.route('/articles').get(function(req, res) {
    console.log("starting nodejs code ");
