@@ -148,22 +148,49 @@ app.get('/articlez', (req, res) => {
              console.log('update: ',req.query.id, req.query.cmd); 
         }
         // Find all articles
+        var articlesPerPage = 20;
+        var pgNum = 0;
+        var nxtPg = 12;
+        
+        if (! req.query.page) {
+        	console.log('Articlez : no page id found.');
+        	console.log('articles per page', articlesPerPage);
+        }
+        else {
+        	pgNum = parseInt(req.query.page);
+        	
+        	console.log('Articlez  page id found:', pgNum);
+        	console.log('articles per page', articlesPerPage);
+        }
+        	
+        
         articlecollection.find({}).toArray(function(err, articleResult) {
           if (err) {
               res.send(err);
           } else if (articleResult.length) {
-              var fltrArticleResult = articleResult.filter(function(obj){
+              articleResult.filter(function(obj){
                  if((obj.show) == 1) {
-                   return true;
+                	 
+                     return true;
                  }
                  return false;
               });
+              fltrArticleResult = articleResult.slice(articlesPerPage * pgNum,
+            		              articlesPerPage * (pgNum + 1));
+              nxtPg = pgNum + 1;
+              prvPg = pgNum - 1;
+              if (prvPg < 0) { prvPg = 0;}
               res.render('articlez', {
                   'articlelist': fltrArticleResult.sort(compare),
                   title: 'Articles',
+                  pagenum: pgNum,
+                  nextpage: nxtPg,
+                  prevpage:prvPg,
               });
           } else {
-              res.send('No documents found');
+              res.render('Articlez', {
+            	  title: 'No articles found',
+              });
           }
           client.close();
         });
