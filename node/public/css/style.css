@@ -100,6 +100,51 @@ tr:hover {background-color: #ddd;}
 /* Buttons
  *    ========================================================================== */
 
+
+
+ul.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+li.menu {
+  float: left;
+  margin-right:  .8em;
+  border-right: 1px solid #bbb;
+}
+
+li.menu:last-child {
+  border-right: none;
+}
+
+a.menu {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  
+}
+
+/* Change the link color to #111 (black) on hover */
+a.menu:hover {
+  background-color: #111;
+}
+
+ .active {
+  background-color: #4CAF50;
+}
+
 .button {
   height: 200px;
   line-height: 150px;

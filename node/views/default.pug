@@ -12,11 +12,15 @@ html
       block header
         header.header
           h1 #{title}
-      a(href="/") 
-        button(type=button) home
-      a(href="/articlez") 
-        button(type=button) articles
-      a(href="/maint") 
-        button(type=button) maintenance
-
+      block navBar
+        ul.menu
+          li.menu 
+            a.menu(href="/") Home   
+          li.menu
+            a.menu(href="/articlez") Reading Room
+          li.menu 
+            a.menu(href="/maint") Maintenance
+          li.menu(style="float:right")
+            a.menu(href="about") About
+       
       block content
