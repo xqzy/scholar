@@ -7,7 +7,7 @@ var express = require('express');
 
 describe("smoke test", function() {
   it("checks equality", function() {
-    expect(true).to.be.true; 
+    expect(true).to.be.true;
   });
 });
 
@@ -40,75 +40,77 @@ describe('Main Article page ', function(){
 describe('Deprecated Article page ', function(){
   it('article page exists', function(done){
     chai.request('http://localhost:8080')
-	.get('/articles')
-	.end(function(err, res) {
-	  res.should.have.status(200);
-	  res.should.be.html;
-          done();
-	});
+    .get('/articles')
+    .end(function(err, res) {
+      res.should.have.status(200);
+      res.should.be.html;
+      done();
+    });
   });
 });
 
 describe('Maintenance page ', function(){
-	  it('maintenance page exists', function(done){
-	    chai.request('http://localhost:8080')
-	    .get('/maint')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-              done();
-	    });
-	  });
-	});
+  it('maintenance page exists', function(done){
+    chai.request('http://localhost:8080')
+    .get('/maint')
+    .end(function(err, res) {
+      res.should.have.status(200);
+      res.should.be.html;
+      done();
+    });
+  });
+});
 
 
 describe('Database Admin page ', function(){
-	  it('dbadmin page exists', function(done){
-	    chai.request('http://localhost:8080')
-	    .get('/dbadmin')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-              done();
-	    });
-	  });
-	});
+  it('dbadmin page exists', function(done){
+    chai.request('http://localhost:8080')
+    .get('/dbadmin')
+    .end(function(err, res) {
+      res.should.have.status(200);
+      res.should.be.html;
+      done();
+    });
+  });
+});
 
 
 describe('Delete Articles page ', function(){
-	  it('Deleta Articles page exists', function(done){
-	    chai.request('http://localhost:8080' )
-	    .get('/deletearticles')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-              done();
-	    });
-	  });
-	});
-
-
-describe('Get Articles page ', function(){
-	  it('Get Articles page exists', function(done){
-	    chai.request('http://localhost:8080')
-	    .get('/getarticles')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-              done();
-	    });
-	  });
-	});
-
+  it('Deleta Articles page exists', function(done){
+    chai.request('http://localhost:8080' )
+    .get('/deletearticles')
+    .end(function(err, res) {
+      res.should.have.status(200);
+      res.should.be.html;
+      done();
+    });
+  });
+});
 
 describe('Recommend page ', function(){
-	  it('Recommend page exists', function(done){
-	    chai.request('http://localhost:8080')
-	    .get('/recommend')
-	    .end(function(err, res) {
-	      res.should.have.status(200);
-	      res.should.be.html;
-             done();
-	    });
-	  });
-	});
+    it('Recommend page exists', function(done){
+      chai.request('http://localhost:8080')
+      .get('/recommend')
+      .end(function(err, res) {
+        res.should.have.status(200);
+        res.should.be.html;
+        done();
+      });
+    });
+  });
+
+describe('Getarticles page', function(){
+   it('provides for overview for summary of articles', function(done){
+     chai.request('http://localhost:8080')
+     .get('/getarticles')
+     .end(function(err, res){
+         res.should.have.status(200);
+         res.should.be.html;
+         done();
+     });
+   }); 
+});
+
+
+
+
