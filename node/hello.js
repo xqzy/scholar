@@ -170,7 +170,7 @@ app.get('/deletearticles', (req, res) => {
 
 app.get('/getarticles', (req, res) => {
   const {spawn} = require('child_process');
-  const getartscmd = spawn('/usr/bin/bash /home/ec2-user/Code/scholar/scripts/get_articles.sh');
+  const getartscmd = spawn('../scripts/get_articles.sh');
   getartscmd.stdout.on('data', (data) => {
 	  console.log(`get_articles.sh  stdout:\n${data}`);
   });
@@ -189,7 +189,7 @@ app.get('/getarticles', (req, res) => {
 
 app.get('/recommend', (req, res) => {
   const exec = require('child_process').exec;
-  var yourscript = exec('/usr/bin/python ../scholar/recommend.py',
+  var yourscript = exec('../scholar/recommend.py',
         (error, stdout, stderr) => {
             console.log(`${stdout}`);
             console.log(`${stderr}`);
