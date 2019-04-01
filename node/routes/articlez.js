@@ -12,6 +12,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
 var dbname = "scholar";
+var sortcriteria="date";
 // sort Crit 
 // sorting criteria 
 // 0 -> sort by score
@@ -35,13 +36,23 @@ module.exports = {
         
         // function to define how articles are to be sorted.....
         function compare (a, b) {
-          if (a.score >  b.score) {
-	    comparison = 1;
-	  } else  {
-	    comparison = -1;
+          if (sortcriteria == "score") {
+              compa = a.score;
+              compb = b.score;
+          } else if (sortcriteria == "date") {
+              compa = a.pubDate;
+              compb = b.pubDate;
+          } else if (sortcriteria == "source"){
+              compa = a.source;
+              compb = b.source;
+          }
+          if (compa >  compb) {
+              comparison = 1;
+          } else  {
+              comparison = -1;
           }
           comparison = comparison * -1;
-	  return comparison
+        return comparison
         }
            
         // fetch url to see whether there was a commond
@@ -81,6 +92,9 @@ module.exports = {
                  }
                });
              console.log('update: ',req.query.id, req.query.cmd); 
+        } else if (req.query.cmd == "sort") {
+           sortcriteria = req.query.id;
+           console.log ("setting sorting criterium to : ", sortcriteria);
         }
         // Find all articles
         var articlesPerPage = 20;
@@ -117,7 +131,7 @@ module.exports = {
               if (prvPg < 0) { prvPg = 0;}
               res.render('articlez', {
                   'articlelist': fltrArticleResult.sort(compare),
-                  title: 'Articles',
+                  title: 'IT Risk Reading Room',
                   pagenum: pgNum,
                   nextpage: nxtPg,
                   prevpage:prvPg,
