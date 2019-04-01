@@ -13,10 +13,13 @@ block content
     meta(content='text/html', charset='utf-8')
     thead
         tr
-          th Source
           th 
-          th Score
-          th Date 
+            a(href=`/articlez?cmd=sort&id=source`) Source
+          th 
+          th
+            a(href=`/articlez?cmd=sort&id=score`) Score
+          th 
+            a(href=`/articlez?cmd=sort&id=date`) Date 
           th title
           th description
         - var i=0;

@@ -112,18 +112,14 @@ module.exports = {
         	console.log('articles per page', articlesPerPage);
         }
         	
-        
-        articlecollection.find({}).toArray(function(err, articleResult) {
+        var query = { show: 1};
+        articlecollection.find(query).toArray(function(err, articleResult) {
           if (err) {
               res.send(err);
           } else if (articleResult.length) {
-              articleResult.filter(function(obj){
-                 if((obj.show) == 1) {
-                	 
-                     return true;
-                 }
-                 return false;
-              });
+              
+              articleResult.sort(compare); 
+              
               fltrArticleResult = articleResult.slice(articlesPerPage * pgNum,
             		              articlesPerPage * (pgNum + 1));
               nxtPg = pgNum + 1;

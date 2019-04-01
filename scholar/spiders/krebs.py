@@ -17,6 +17,7 @@ class Spider(XMLFeedSpider):
                   'https://marcoramilli.com/rss',
                   'https://www.schneier.com/blog/atom.xml',
                   'https://danielmiessler.com/feed/',
+                  'https://www.darkreading.com/rss_simple.asp',
                   'https://www.infosecblog.org/feed'
                    ]    #Crawl BPMX
     itertag = 'item'
@@ -65,5 +66,6 @@ class Spider(XMLFeedSpider):
         elif (page.find("schneier")>=0): item['source']="Schneier"
         elif (page.find("miessler")>=0): item['source']="Miessler"
         elif (page.find("infosecblog")>=0): item['source']="InfoSecBlog"
+        elif (page.find("darkread")>=0): item['source']="Dark Reading"
         item['like'] = 0
         yield item
