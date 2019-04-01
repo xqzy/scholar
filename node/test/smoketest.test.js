@@ -16,7 +16,7 @@ describe('Front end page', function(){
     chai.request('http://localhost:8080')
     .get('/')
     .end(function(err, res) {
-      should.exist(res);
+//       should.exist(res);
       res.should.have.status(200);
       res.should.be.html;
       done();
@@ -26,6 +26,7 @@ describe('Front end page', function(){
 
 
 describe('Main Article page ', function(){
+  this.timeout(4000);
   it('article page exists', function(done){
     chai.request('http://localhost:8080')
     .get('/articlez')
@@ -38,7 +39,8 @@ describe('Main Article page ', function(){
 });
 
 describe('Deprecated Article page ', function(){
-  it('article page exists', function(done){
+    this.timeout(4000);
+    it('article page exists', function(done){
     chai.request('http://localhost:8080')
     .get('/articles')
     .end(function(err, res) {
@@ -111,6 +113,18 @@ describe('Getarticles page', function(){
    }); 
 });
 
+describe('Front end page', function(){
+  it('landing page exists', function(done){
+    chai.request('http://localhost:8080')
+    .get('/')
+    .end(function(err, res) {
+      should.exist(res);
+      res.should.have.status(200);
+      res.should.be.html;
+      done();
+    });
+  });
+});
 
 
 

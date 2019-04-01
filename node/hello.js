@@ -109,7 +109,7 @@ app.get('/dbadmin', (req, res) => {
      // import database from S3 bucket.
 	  retstr="";
 	  const {spawn} =require('child_process');
-	  const impcmd = spawn ('/home/ec2-user/Code/scholar/scripts/import-db.sh');
+	  const ihttps://www.darkreading.com/rss_simple.aspmpcmd = spawn ('/home/ec2-user/Code/scholar/scripts/import-db.sh');
 	  impcmd.stdout.on('data', (data) => {
 		  retstr = retstr + `${data}`;
 	  });
