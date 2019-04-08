@@ -1,0 +1,42 @@
+extends default
+
+
+block content
+  
+  div.container
+  
+  a(href=`/sources?page=${prevpage}`)  "<--"
+  p: page: #{pagenum}
+  a(href=`/sources?page=${nextpage}`)  "-->"
+  
+  table
+    meta(content='text/html', charset='utf-8')
+    thead
+        tr
+          th 
+            a(href=`/articlez?cmd=sort&id=source`) Source
+          th 
+          th
+            a(href=`/articlez?cmd=sort&id=score`) Score
+          th 
+            a(href=`/articlez?cmd=sort&id=date`) Date 
+          th title
+          th description
+        - var i=0;
+        tbody
+          each source, i in sourcelist
+            tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              td=item.source
+              td(width='4%')
+                a(href=`/articlez?cmd=hd&id=${item._id}`) 
+                  i.fa.fa-trash          
+                a(href=`/articlez?cmd=lk&id=${item._id}`) 
+                  if (item.like == 1)
+                    i.fa.fa-heart
+                  else
+                    i.fa.fa-heart-o
+              td=item.score
+              td=item.pubDate
+              td(width='20%')
+                a(href=item.link target="_blank") #{item.title}
+              td #{item.description}

@@ -28,7 +28,7 @@ module.exports = {
     
   MongoClient.connect(url, function(err, client) {
     if (err) {
-        console.log('Unable to connect to the Server', err);
+        console.log('Unable to connect to the Server', url);
     } else {
         console.log('Connection established to', url);
         const db = client.db(`${dbname}`);

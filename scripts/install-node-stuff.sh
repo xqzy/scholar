@@ -10,5 +10,6 @@ npm install pug
 npm install -g mocha
 npm install chai
 npm install chai-http
+npm install dotenv
 pm2 start ~/Code/scholar/node/hello.js
-:
+
