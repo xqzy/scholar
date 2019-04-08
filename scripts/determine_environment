@@ -11,7 +11,7 @@
 # RS
 # 19-03-26
 #
-
+# environment variable
 export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}'`" 
 if [ -z "$ENV" ]
 then
@@ -19,3 +19,10 @@ then
 fi
 echo Current environment is $ENV
 echo export ENV="$ENV"  >> /etc/profile
+#
+# password for mongodb cluster
+#
+export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep PASS | awk '{print $2}'`" 
+
+
+echo export PASS="$PASS"  >> /etc/profile
