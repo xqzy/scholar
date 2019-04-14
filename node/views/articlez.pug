@@ -1,14 +1,20 @@
 extends default
-
-
+  
 block content
+  link(rel='stylesheet', href='/css/style.css')
   
+  
+  block navbar
+    ul.menu
+      li.menu
+        a.menu(href=`/articlez?page=${prevpage}`) <--
+      li.menu
+        a.menu(href=`/articlez?page=${pagenum}`)  Page #{pagenum}
+      li.menu
+        a.menu(href=`/articlez?page=${nextpage}`)  -->
+      li.menu
+        a.menu(href=`/articlez?cmd=fltr&id=`) Reset Filter
   div.container
-  
-  a(href=`/articlez?page=${prevpage}`)  "<--"
-  p: page: #{pagenum}
-  a(href=`/articlez?page=${nextpage}`)  "-->"
-  
   table
     meta(content='text/html', charset='utf-8')
     thead

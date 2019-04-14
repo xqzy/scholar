@@ -18,6 +18,7 @@ console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
 var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
+var sourcesPage = require('./routes/sources.js');
 
 var str = "";
 
@@ -46,6 +47,11 @@ app.route('/article').get(function(req,res){
 
 app.route('/articlez').get(function(req,res){
 	articlezPage.getArticlezPage(req, res);
+});
+
+
+app.route('/sources').get(function(req,res){
+    sourcesPage.getSourcesPage(req, res);
 });
 
 app.route('/articles').get(function(req, res) {

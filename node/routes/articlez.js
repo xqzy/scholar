@@ -13,6 +13,8 @@ var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
 var dbname = "scholar";
 var sortcriteria="date";
+var sourcefilter="MT";
+
 // sort Crit 
 // sorting criteria 
 // 0 -> sort by score
@@ -96,6 +98,14 @@ module.exports = {
            sortcriteria = req.query.id;
            console.log ("setting sorting criterium to : ", sortcriteria);
         }
+        else if (req.query.cmd == "fltr") {
+           if (req.query.id.length !== 0) {
+             sourcefilter = {source: req.query.id};
+             console.log("setting source filter to :", sourcefilter);
+           } else {
+               sourcefilter = "MT";
+           }
+        }
         // Find all articles
         var articlesPerPage = 20;
         var pgNum = 0;
@@ -111,8 +121,12 @@ module.exports = {
         	console.log('Articlez  page id found:', pgNum);
         	console.log('articles per page', articlesPerPage);
         }
-        	
-        var query = { show: 1};
+        // var sourcefilter = {source:"Schneier"};	
+        if ( sourcefilter !='MT') {
+          var query = {$and :[ sourcefilter, {show:1}] };
+        } else {
+            var query = {show:1};
+        }
         articlecollection.find(query).toArray(function(err, articleResult) {
           if (err) {
               res.send(err);
@@ -133,7 +147,8 @@ module.exports = {
                   prevpage:prvPg,
               });
           } else {
-              res.render('Articlez', {
+              res.render('articlez', {
+                  
             	  title: 'No articles found',
               });
           }

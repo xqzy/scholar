@@ -108,6 +108,7 @@ ul.menu {
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  foreground-color: #FFFFFF;
   position: fixed;
   top: 80px;
   width: 100%;
@@ -120,10 +121,12 @@ li.menu {
   float: left;
   margin-right:  .8em;
   border-right: 1px solid #bbb;
+  color: white;
 }
 
 li.menu:last-child {
   border-right: none;
+  color: white;
 }
 
 a.menu {
