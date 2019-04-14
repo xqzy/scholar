@@ -18,7 +18,8 @@ class Spider(XMLFeedSpider):
                   'https://www.schneier.com/blog/atom.xml',
                   'https://danielmiessler.com/feed/',
                   'https://www.darkreading.com/rss_simple.asp',
-                  'https://www.infosecblog.org/feed'
+                  'https://www.infosecblog.org/feed',
+                  'https://www.risk.net/feeds/rss/category/risk-management/operational-risk'
                    ]    #Crawl BPMX
     itertag = 'item'
 
@@ -65,7 +66,8 @@ class Spider(XMLFeedSpider):
         elif (page.find("marcoramilli")>=0): item['source']="Ramilli"
         elif (page.find("schneier")>=0): item['source']="Schneier"
         elif (page.find("miessler")>=0): item['source']="Miessler"
-        elif (page.find("infosecblog")>=0): item['source']="InfoSecBlog"
+        elif (page.find("InfosecBlog")>=0): item['source']="InfoSecBlog"
         elif (page.find("darkread")>=0): item['source']="Dark Reading"
+        elif (page.find("risk.net")>=0): item['source']="Risk.net"
         item['like'] = 0
         yield item

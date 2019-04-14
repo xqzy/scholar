@@ -50,4 +50,5 @@ for article in articles:
      { "_id": article["_id"]},
      { '$set': {"score": score}}
    )
+print "Recommendation scores succesfully adjusted"
 
