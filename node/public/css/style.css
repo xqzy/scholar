@@ -2,7 +2,6 @@
  *    #STYLES
  *       ========================================================================== */
 
-
 /**
  *  *
  *   * [1]: Inheriting box sizing slightly better best-practice
@@ -11,154 +10,140 @@
  *      * [2]: WordPress System font-stack
  *       */
 
-
 /* RESET
  *    ========================================================================== */
-
-
 html {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 *, *::before, *::after {
-  box-sizing: inherit; /* [1] */
-  margin: 0;
-  padding: 0;
+	box-sizing: inherit; /* [1] */
+	margin: 0;
+	padding: 0;
 }
-
-
 
 /* FONTS
  *    ========================================================================== */
-
 body {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; /* [2] */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	/* [2] */
 }
-
-
 
 /* Header
  *    ========================================================================== */
-
 .header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  background-color: #01700d;
-  color: #FFFFFF;
-  margin-bottom: 50px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	background-color: #01700d;
+	color: #FFFFFF;
+	margin-bottom: 50px;
 }
-
-
 
 /* Homepage Container
  *    ========================================================================== */
-
 .container {
-  width: 960px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+	width: 960px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
 }
-
-
-
-
-
-
 
 /* Table
  *    ========================================================================== */
 table {
-  border: 1px solid black;
-  width: 100%;
+	border: 1px solid black;
+	width: 100%;
 }
 
 th, td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
 
 th {
-  height: 50px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
-td {
-  height: 50px;
-  vertical-align: bottom;
+	height: 50px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
-tr:hover {background-color: #ddd;}
+td {
+	height: 50px;
+	vertical-align: bottom;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #ddd;
+}
 
 /* Buttons
  *    ========================================================================== */
-
-
-
 ul.menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  foreground-color: #FFFFFF;
-  position: fixed;
-  top: 80px;
-  width: 100%;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	foreground-color: #FFFFFF;
+	position: fixed;
+	top: 80px;
+	width: 100%;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
 }
 
 li.menu {
-  float: left;
-  margin-right:  .8em;
-  border-right: 1px solid #bbb;
-  color: white;
+	float: left;
+	margin-right: .8em;
+	border-right: 1px solid #bbb;
+	color: white;
 }
 
 li.menu:last-child {
-  border-right: none;
-  color: white;
+	border-right: none;
+	color: white;
 }
 
 a.menu {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */
 a.menu:hover {
-  background-color: #111;
+	background-color: #111;
 }
 
- .active {
-  background-color: #4CAF50;
+.active {
+	background-color: #4CAF50;
 }
 
 .button {
-  height: 200px;
-  line-height: 150px;
-  width: 100%;
-  text-decoration: none;
-  text-align: center;
-  font-size: 30px
+	height: 200px;
+	line-height: 150px;
+	width: 100%;
+	text-decoration: none;
+	text-align: center;
+	font-size: 30px
 }
 
 .button-twitter {
-  color: #FFFFFF;
-  background-color: #659AF1;
-  border-radius: 5px;
+	color: #FFFFFF;
+	background-color: #659AF1;
+	border-radius: 5px;
 }

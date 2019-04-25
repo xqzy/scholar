@@ -1,4 +1,12 @@
-{"_id":{"$oid":"5c75a5e9ec56da30bbbf1952"},"link":"https://www.securitymagazine.com/articles/89835-bbva-compass-names-brian-fricke-ciso","description":"\n        \u003cp\u003eBBVA Compass has named\u0026nbsp;Brian Fricke\u0026nbsp;as its Chief Information Security Officer (CISO), where he will oversee the bank\u0026#39;s Information Security and Engineering Risk functions.\u003c/p\u003e\n      ","pubDate":null,"title":"BBVA Compass names Brian Fricke CISO"}
+{
+	"_id": {
+		"$oid": "5c75a5e9ec56da30bbbf1952"
+	},
+	"link": "https://www.securitymagazine.com/articles/89835-bbva-compass-names-brian-fricke-ciso",
+	"description": "\n        \u003cp\u003eBBVA Compass has named\u0026nbsp;Brian Fricke\u0026nbsp;as its Chief Information Security Officer (CISO), where he will oversee the bank\u0026#39;s Information Security and Engineering Risk functions.\u003c/p\u003e\n      ",
+	"pubDate": null,
+	"title": "BBVA Compass names Brian Fricke CISO"
+}
 {"_id":{"$oid":"5c75a5e9ec56da30bbbf1953"},"link":"https://www.securitymagazine.com/articles/89709-workforce-drug-positivity-rises-by-double-digits-in-almost-one-third-of-us-industry-sectors-examined","description":"\n        \u003cp\u003eDrug use by the U.S. workforce increased each year -- and by double-digits over two years -- between 2015 and 2017, in five of 16 major U.S. industry sectors analyzed.\u003c/p\u003e\n\n      ","pubDate":null,"title":"Workforce Drug Positivity Rises by Double-Digits in Almost One-Third of U.S. Industry Sectors Examined"}
 {"_id":{"$oid":"5c75a5e9ec56da30bbbf1954"},"link":"https://www.securitymagazine.com/articles/89568-gordon-macdonald-overseeing-a-medium-sized-city","description":"\n        \u003cp\u003e\u0026ldquo;The most difficult part of the job is prioritizing given the number of incidents that could occur,\u0026rdquo; says Gordon MacDonald, Senior Director, Corporate Security for Wells Fargo.\u003c/p\u003e\n      ","pubDate":null,"title":"Gordon MacDonald: Overseeing a Medium-Sized City"}
 {"_id":{"$oid":"5c75a5e9ec56da30bbbf1955"},"link":"https://www.securitymagazine.com/articles/89529-fighting-fraud-in-the-era-of-real-time-payments","description":"\n        Sixty-one percent of merchants believe they’re at greater risk of a data breach than a year ago, while 22 percent of merchants have experienced data theft in the last year alone. \n      ","pubDate":null,"title":"Fighting Fraud in the Era of Real-Time Payments"}
