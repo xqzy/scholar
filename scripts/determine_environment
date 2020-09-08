@@ -12,7 +12,7 @@
 # 19-03-26
 #
 # environment variable
-export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}'`" 
+export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}' | head -1`" 
 if [ -z "$ENV" ]
 then
 	ENV="DEV"
@@ -22,7 +22,8 @@ echo export ENV="$ENV"  >> /etc/profile
 #
 # password for mongodb cluster
 #
-export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep PASS | awk '{print $2}'`" 
+export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep PASS | awk '{print $2}' | head -1 `" 
 
 
+echo Current pwd is $PASS
 echo export PASS="$PASS"  >> /etc/profile
