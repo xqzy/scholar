@@ -13,6 +13,10 @@ import os
 
 pw = os.environ.get('PASS')
 
+if isinstance(pw, basestring):
+	DUM = 'dum'
+else:
+	pw = 'dum'
 
 BOT_NAME = 'scholar'
 

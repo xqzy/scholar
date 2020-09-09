@@ -6,18 +6,19 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
-from scrapy.conf import settings
+from scrapy.utils.project import get_project_settings
 from scrapy.exceptions import DropItem
-from scrapy import log
+import logging
 
 class ScholarPipeline(object):
     def __init__(self):
+	settings=get_project_settings()
 	connection = pymongo.MongoClient(
-		settings['MONGODB_SERVER'],
-		settings['MONGODB_PORT']
+		settings.get('MONGODB_SERVER'),
+		settings.get('MONGODB_PORT')
 	)
-	db=connection[settings['MONGODB_DB']]
-	self.collection = db[settings['MONGODB_COLLECTION']]		
+	db=connection[settings('MONGODB_DB')]
+	self.collection = db[settings('MONGODB_COLLECTION')]		
 
 
     def process_item(self, item, spider):
