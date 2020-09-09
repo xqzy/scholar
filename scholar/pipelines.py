@@ -17,8 +17,8 @@ class ScholarPipeline(object):
 		settings.get('MONGODB_SERVER'),
 		settings.get('MONGODB_PORT')
 	)
-	db=connection[settings('MONGODB_DB')]
-	self.collection = db[settings('MONGODB_COLLECTION')]		
+	db=connection[settings.get('MONGODB_DB')]
+	self.collection = db[settings.get('MONGODB_COLLECTION')]		
 
 
     def process_item(self, item, spider):
