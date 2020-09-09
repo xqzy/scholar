@@ -5,6 +5,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | b
 . ~/.nvm/nvm.sh
 nvm install v10.15.1
 npm i -g pm2@2.4.3
+npm install express
 npm install express-session
 npm install session-file-store
 npm install mongodb
