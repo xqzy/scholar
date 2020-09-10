@@ -5,7 +5,7 @@
 
 import pymongo
 import re
-from scrapy.utils.project import project_settings
+from scrapy.utils.project import get_project_settings
 from scrapy import log
 
 settings=get_project_settings()
