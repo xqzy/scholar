@@ -5,18 +5,19 @@
 
 import pymongo
 import re
-from scrapy.conf import settings
+from scrapy.utils.project import project_settings
 from scrapy import log
 
+settings=get_project_settings()
 try:
     connection = pymongo.MongoClient(
-      settings['MONGODB_SERVER'],
-      settings['MONGODB_PORT']
+      settings.get('MONGODB_SERVER'),
+      settings.get('MONGODB_PORT')
     )
 except pymongo.errors.ConnectionFailure, e:
     print "Could not connect to database: %s " % e
-db=connection[settings['MONGODB_DB']]
-articlecol = db[settings['MONGODB_COLLECTION']]		
+db=connection[settings.get('MONGODB_DB')]
+articlecol = db[settings.get('MONGODB_COLLECTION')]		
 
 searchwords = [ { 'match': 'ATM', 'score': 12 },
                 { 'match': 'PCI', 'score': 12 },
