@@ -15,7 +15,7 @@ describe('Front end page', function(){
   it('landing page exists', function(done){
     chai.request('http://localhost:8080')
     .get('/')
-    .end((err, res) => {
+    .end(function(err, res) {
 //      res.should.have.status(200);
       res.should.be.html;
       done();
@@ -103,31 +103,6 @@ describe('Delete Articles page ', function(){
 //      });
 //    });
 //  });
-
-describe('Getarticles page', function(){
-   it('provides for overview for summary of articles', function(done){
-     chai.request('http://localhost:8080')
-     .get('/getarticles')
-     .end(function(err, res){
-         res.should.have.status(200);
-         res.should.be.html;
-         done();
-     });
-   }); 
-});
-
-describe('Front end page', function(){
-  it('landing page exists', function(done){
-    chai.request('http://localhost:8080')
-    .get('/')
-    .end(function(err, res) {
-      should.exist(res);
-      res.should.have.status(200);
-      res.should.be.html;
-      done();
-    });
-  });
-});
 
 
 
