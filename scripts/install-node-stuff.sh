@@ -14,5 +14,5 @@ npm install -g mocha
 npm install chai
 npm install chai-http
 npm install dotenv
-pm2 start ~/Code/scholar/node/hello.js
+pm2 start ~/Code/scholar/node/hello.js >> app.log 2>&1
 
