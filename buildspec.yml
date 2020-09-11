@@ -25,7 +25,7 @@ phases:
       - su ec2-user -c '. ~/.nvm/nvm.sh && cd ~/Code/scholar/node && pm2 start node/hello.js && npm test' 
   post_build:
     commands:
-      - echo Nothing to do postbuildt
+      - echo Nothing to do postbuildtt
 artifacts:
   files:
     - '**/*'
