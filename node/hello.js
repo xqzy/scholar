@@ -243,16 +243,17 @@ app.get('/getarticles', (req, res) => {
 app.use(auth);
 
 app.get('/recommend', (req, res) => {
-  const exec = require('child_process').exec;
-  var yourscript = exec('../scholar/recommend.py',
-        (error, stdout, stderr) => {
-            console.log(`${stdout}`);
-            console.log(`${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        });
-   res.render('recommend', {
+  const {spawn} = require('child_process');
+  const reccmd = spawn('sh', ['/home/ec2-user/Code/scholar/recommend.py']);
+  reccmd.stdout.on('data', (data)=> {
+    console.log(`recommend.py stdout:\n${data}`);
+    console.log(`${stderr}`);
+  });
+  reccmd.on('exit', function (code, signal) {
+    console.log('reccmd process exited with ' +
+    		`code ${code} and signal ${signal}`);
+  });
+  res.render('recommend', {
      title: 'recommend',
   });
 });
