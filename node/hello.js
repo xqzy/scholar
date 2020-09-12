@@ -223,7 +223,7 @@ app.get('/deletearticles', (req, res) => {
 
 app.get('/getarticles', (req, res) => {
   const {spawn} = require('child_process');
-  const getartscmd = spawn('../scripts/get_articles.sh');
+  const getartscmd = spawn('sh ~/Code/scholar/scripts/get_articles.sh');
   getartscmd.stdout.on('data', (data) => {
 	  console.log(`get_articles.sh  stdout:\n${data}`);
   });
