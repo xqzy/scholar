@@ -3,6 +3,9 @@
 
 # SCript to search through articles and make recommendations (by scoring articles)
 
+import os
+os.chdir('/home/ec2-user/scholar/scholar')
+
 import pymongo
 import re
 from scrapy.utils.project import get_project_settings
