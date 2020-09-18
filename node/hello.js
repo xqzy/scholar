@@ -244,7 +244,7 @@ app.use(auth);
 
 app.get('/recommend', (req, res) => {
   const {spawn} = require('child_process');
-  const reccmd = spawn('sh', ['cd','/home/ec2-user/Code/scholar/scholar','&&','python','/home/ec2-user/Code/scholar/scholar/recommend.py']);
+  const reccmd = spawn('python', ['/home/ec2-user/Code/scholar/scholar/recommend.py']);
   
   reccmd.stdout.on('data', (data)=> {
     console.log(`recommend.py stdout:\n${data}`);

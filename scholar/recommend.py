@@ -35,7 +35,7 @@ print "number of records found: ", articles.count()
 teller = 0
 for article in articles:
    teller += 1;
-#    print "teller {teller}", teller;
+   print "teller {teller}", teller;
    score = 100
    for sw in searchwords:
      # analyse description of article
