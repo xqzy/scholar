@@ -4,7 +4,7 @@
 # SCript to search through articles and make recommendations (by scoring articles)
 
 import os
-os.chdir('/home/ec2-user/scholar/scholar')
+os.chdir('/home/ec2-user/Code/scholar/scholar')
 
 import pymongo
 import re
