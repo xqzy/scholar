@@ -9,6 +9,11 @@ from scrapy.utils.project import get_project_settings
 import logging
 
 settings=get_project_settings()
+
+print "server info ", settings.get('MONGODB_SERVER')
+print "port info   ", settings.get('MONGODB_PORT')
+
+
 try:
     connection = pymongo.MongoClient(
       settings.get('MONGODB_SERVER'),
