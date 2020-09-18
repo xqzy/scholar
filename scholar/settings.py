@@ -10,8 +10,9 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 import os
+from decouple import config
 
-pw = os.environ.get('PASS')
+pw = config('PASS')
 
 if isinstance(pw, basestring):
 	DUM = 'dum'
