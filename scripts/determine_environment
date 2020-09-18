@@ -18,7 +18,8 @@ then
 	ENV="DEV"
 fi
 echo Current environment is $ENV
-echo export ENV="$ENV"  >> /home/ec2-user/.bashrc
+echo "# added by determine.environment.sh " >> /home/ec2-user/Code/scholar/.env
+echo ENV="$ENV"  >> /home/ec2-user/Code/scholar/.env
 #
 # password for mongodb cluster
 #
@@ -26,4 +27,4 @@ export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Va
 
 
 echo Current pwd is $PASS
-echo export PASS="$PASS"  >> /home/ec2-user/.bashrc
+echo PASS="$PASS"  >> /home/ec2-user/Code/scholar/.env

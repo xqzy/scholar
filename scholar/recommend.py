@@ -3,12 +3,20 @@
 
 # SCript to search through articles and make recommendations (by scoring articles)
 
+import os
+os.chdir('/home/ec2-user/Code/scholar/scholar')
+
 import pymongo
 import re
 from scrapy.utils.project import get_project_settings
 import logging
 
 settings=get_project_settings()
+
+print "server info ", settings.get('MONGODB_SERVER')
+print "port info   ", settings.get('MONGODB_PORT')
+
+
 try:
     connection = pymongo.MongoClient(
       settings.get('MONGODB_SERVER'),
@@ -35,7 +43,7 @@ print "number of records found: ", articles.count()
 teller = 0
 for article in articles:
    teller += 1;
-#    print "teller {teller}", teller;
+   print "teller {teller}", teller;
    score = 100
    for sw in searchwords:
      # analyse description of article
