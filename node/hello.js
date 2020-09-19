@@ -2,6 +2,7 @@
 
 // obtain the environment variable to determine whether this is prod/test/dev
 var env = process.env.ENV || 'DEV';
+console.log("[hello.js]  environment detected: (should be PROD/TEST/DEV): ", env);
 var config = require(`./config/${env}`);
 module.exports = config;
 var  session = require('express-session');
