@@ -10,8 +10,8 @@ class Spider(XMLFeedSpider):
     allowed_domains = ["schneier.com"]
     start_urls = ['https://www.schneier.com/feed']    #Crawl BPMX
     namespaces = [('n', 'http://www.w3.org/2005/Atom')]
-    itertag = 'n:entry'
-    iterator = 'xml'
+    itertag = 'item'
+#    iterator = 'xml'
 
 
     def parse_node(self, response, node):
