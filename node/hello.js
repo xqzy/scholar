@@ -3,8 +3,11 @@
 // obtain the environment variable to determine whether this is prod/test/dev
 var env = process.env.ENV || 'DEV';
 console.log("[hello.js]  environment detected: (should be PROD/TEST/DEV): ", env);
+
+// now fetch the correct environment file.
 var config = require(`./config/${env}`);
 module.exports = config;
+
 var  session = require('express-session');
 
 var express = require('express');
@@ -16,8 +19,8 @@ var FileStore = require('session-file-store')(session);
 
 var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
-var dbname = "scholar";
-
+var dbname = config.dbname;
+console.log ("[hello.js] database " + dbname + " used.");
 console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
 var articlePage = require('./routes/article.js');

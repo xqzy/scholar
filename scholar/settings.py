@@ -98,9 +98,15 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+env = config('ENV')
+	
 ITEM_PIPELINES = {'scholar.pipelines.ScholarPipeline':300}
 MONGODB_SERVER = "mongodb+srv://admin:" + pw +"@scholar-cyx09.mongodb.net/"
 MONGODB_PORT = 27017
-MONGODB_DB = "scholar"
 MONGODB_COLLECTION = "scholar"
 
+if (env == "TEST"):
+	MONGODB_DB = "scholar"
+if (env == "PROD"):
+	MONGODB_DB = "scholarprod"

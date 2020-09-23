@@ -7,6 +7,7 @@ dbstr = "mongodb+srv://admin:" + pw + "\@scholar-cyx09.mongodb.net/test?retryWri
 module.exports = {
   env: 'TEST',
   db:  dbstr,
+  dbname: 'scholar',
   port:  process.env.PORT || 4000,
 };
 
