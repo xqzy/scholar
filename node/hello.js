@@ -138,8 +138,12 @@ function auth (req, res, next) {
   }
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/', (req, res) => {
+   var titel = 'Homepage';
+   if (env == 'TEST') {
+     titel = 'TEST Homepage TEST';
+   }
    res.render('index', {
-     title: 'Homepage',
+     title: titel,
   });
 });
 
