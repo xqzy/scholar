@@ -1,7 +1,12 @@
 // use 'strict';
-
+//
+// define variables
+//
 // obtain the environment variable to determine whether this is prod/test/dev
 var env = process.env.ENV || 'DEV';
+console.log("[hello.js]  environment detected: (should be PROD/TEST/DEV): ", env);
+
+// now fetch the correct environment file.
 var config = require(`./config/${env}`);
 module.exports = config;
 
@@ -12,19 +17,81 @@ module.exports - app;
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
-
-
+// database connection to articles database
 var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
-var dbname = "scholar";
+var dbname = config.dbname;
+console.log ("[hello.js] database " + dbname + " used.");
 
-console.log `dbname  ${dbname}`;
+// double -> removed
+var  session = require('express-session');
+//
+// Configuring Passport
+//
+var passport = require('passport');
+
+// 
+// define uses
+//
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+ // Using the flash middleware provided by connect-flash to store messages in session
+ // and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+// 
+// Mongoose setup for
+// database connection to user database
+//
+var mongoose_users = require('mongoose');
+// const passportLocalMongoose = require('passport-local-mongoose');
+//  connect to user database with the url provided in the configuration files for the envs.
+var dbusers = config.dbusers;
+console.log("[hello.js] user database " + dbusers + " used.");
+mongoose_users.connect(url+dbusers);
+
+const Schema = mongoose_users.Schema;
+const UserDetail = new Schema({
+  username: String,
+  password: String
+});
+
+// UserDetail.plugin(passportLocalMongoose);
+// const UserDetails = mongoose_users.model('userInfo', UserDetail, 'userInfo');
+
+
+// 
+// passport local authentication
+//
+console.log("[hello.js] initializing passport");
+//passport.use(UserDetails.createStrategy());
+
+//passport.serializeUser(UserDetails.serializeUser());
+//passport.deserializeUser(UserDetails.deserializeUser());
+
+
+
+
+
+// Routes
 var aboutPage = require('./routes/about.js');
 var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
+
+var signupPage = require('./routes/signup.js');
 var sourcesPage = require('./routes/sources.js');
 
 var str = "";
+
+
+
 
 // edited from own workstation -> eclipse
 function formatDate(date) {
@@ -39,11 +106,13 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+console.log("[hello.js] initializing routes");
 app.set('view engine', 'pug');
 
 app.route('/about').get(function(req, res) {
 	aboutPage.getAboutPage(req, res);
 });
+
 
 app.route('/article').get(function(req,res){
 	articlePage.getArticlePage(req, res);
@@ -88,14 +157,90 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 // app.use(express.static(__dirname + '/views'));
 
+console.log("[hello.js] initializing session id");
+app.use(session({
+    name: 'session-id',
+    secret: '12345-67890-09876-54321',
+    saveUninitialized: false,
+    resave: false,
+    store: new FileStore
+}));
+
 app.set('views', __dirname + '/views');
+/*
+function auth (req, res, next) {
+    console.log(req.session);
+    if (!req.session.user) {
+      var authHeader = req.headers.authorization;
+      if (!authHeader) {
+          var err = new Error('You are not authenticated!');
+          res.setHeader('WWW-Authenticate', 'Basic');              
+          err.status = 401;
+          next(err);
+          return;
+      }
+      var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+      var user = auth[0];
+      var pass = auth[1];
+      if (user == 'admin' && pass == 'password') {
+          req.session.user = 'admin';
+          next(); // authorized
+      } else {
+          var err = new Error('You are not authenticated!');
+          res.setHeader('WWW-Authenticate', 'Basic');              
+          err.status = 401;
+          next(err);
+      }
+    }
+    else {
+        if (req.session.user === 'admin') {
+            next();
+        }
+        else {
+            var err = new Error('You are not authenticated!');
+            err.status = 401;
+            next(err);
+        }
+    }
+  }
+  
+*/ 
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/', (req, res) => {
+   var titel = 'Homepage';
+   if (env == 'TEST') {
+     titel = 'TEST Homepage TEST';
+   }
+   if (env == 'DEV') {
+     titel = 'DEV Homepage DEV';
+   }
    res.render('index', {
-     title: 'Homepage',
+     title: titel,
   });
 });
+
+// register route to login functionality in routes/login script
+console.log("[hello.js] initializing login routes 1");
+var loginroute = require('./routes/login.js')(passport);
+console.log("[hello.js] initializing login routes 1a");
+app.use('/login', loginroute);
+
+// register route to signup functionality in routes/signup script
+console.log("[hello.js] login routes 2 -> register sign-up");
+var signuproute = require('./routes/signup.js')(passport);
+app.use('/signup', signuproute);
+
+ /* Handle Registration POST
+ console.log("[hello.js] login routes 3");
+app.route('/signup').post(function(req,res) {
+   passport.authenticate('signup', {
+     successRedirect: '/home',
+     failureRedirect: '/signup',
+     failureFlash : true
+   });
+});
+*/
 
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
@@ -181,7 +326,7 @@ app.get('/deletearticles', (req, res) => {
 
 app.get('/getarticles', (req, res) => {
   const {spawn} = require('child_process');
-  const getartscmd = spawn('../scripts/get_articles.sh');
+  const getartscmd = spawn('sh',['/home/ec2-user/Code/scholar/scripts/get_articles.sh']);
   getartscmd.stdout.on('data', (data) => {
 	  console.log(`get_articles.sh  stdout:\n${data}`);
   });
@@ -197,21 +342,27 @@ app.get('/getarticles', (req, res) => {
    title: 'getarticles',
   });
 });
+// all code below requires authentication
 
+//  app.use(auth);
+// code for the recommend functionality
 app.get('/recommend', (req, res) => {
-  const exec = require('child_process').exec;
-  var yourscript = exec('../scholar/recommend.py',
-        (error, stdout, stderr) => {
-            console.log(`${stdout}`);
-            console.log(`${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        });
-   res.render('recommend', {
+  const {spawn} = require('child_process');
+  const reccmd = spawn('python', ['/home/ec2-user/Code/scholar/scholar/recommend.py']);
+  
+  reccmd.stdout.on('data', (data)=> {
+    console.log(`recommend.py stdout:\n${data}`);
+//    console.log(`${stderr}`);
+  });
+  reccmd.on('exit', function (code, signal) {
+    console.log('reccmd process exited with ' +
+    		`code ${code} and signal ${signal}`);
+  });
+  res.render('recommend', {
      title: 'recommend',
   });
 });
+
 
 var server = app.listen(8080, function() {
   console.log(`Express running → PORT ${server.address().port}`);
