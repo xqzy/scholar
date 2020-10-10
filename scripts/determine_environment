@@ -12,7 +12,14 @@
 # 19-03-26
 #
 # environment variable
-export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}' | head -1`" 
+# first obtain the instance-id
+export AWS_INSTANCE_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
+
+## export ENV="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}' | head -1`" 
+export ENV="`aws ec2 describe-tags --region "us-west-2" --filters "Name=resource-id,Values=$AWS_INSTANCE_ID"  "Name=key,Values=environment" --query 'Tags[].[Key,Value]' --output text | grep environment | awk '{print $2}'`"
+
+
+
 if [ -z "$ENV" ]
 then
 	ENV="DEV"
