@@ -104,7 +104,7 @@ env = config('ENV')
 ITEM_PIPELINES = {'scholar.pipelines.ScholarPipeline':300}
 MONGODB_SERVER = "mongodb+srv://admin:" + pw +"@scholar-cyx09.mongodb.net/"
 MONGODB_PORT = 27017
-MONGODB_COLLECTION = "scholar"
+MONGODB_COLLECTION = "articles"
 
 if (env == "TEST"):
 	MONGODB_DB = "scholar"

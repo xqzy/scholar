@@ -12,6 +12,7 @@
 	"dependencies": {
 		"express": "^4.16.3",
 		"express-session": "^1.16.1",
+		"mongoose": "^5.10.8",
 		"session-file-store": "^1.2.0"
 	},
 	"devDependencies": {

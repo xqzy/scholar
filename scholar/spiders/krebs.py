@@ -15,7 +15,7 @@ class Spider(XMLFeedSpider):
                   'https://www.grahamcluley.com/feed',
                   'https://www.hackingarticles.in/rss',
                   'https://marcoramilli.com/rss',
-                  'https://www.schneier.com/blog/atom.xml',
+                  'https://www.schneier.com/feed/rss2',
                   'https://danielmiessler.com/feed/',
                   'https://www.darkreading.com/rss_simple.asp',
                   'https://www.infosecblog.org/feed',

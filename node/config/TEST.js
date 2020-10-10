@@ -1,7 +1,7 @@
 // use 'strict';
 require('dotenv').config()
 pw = process.env.PASS;
-dbstr = "mongodb+srv://admin:" + pw + "\@scholar-cyx09.mongodb.net/test?retryWrites=true";
+dbstr = "mongodb+srv://admin:" + pw + "\@scholar-cyx09.mongodb.net/scholar?retryWrites=true";
 
 
 module.exports = {
