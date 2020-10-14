@@ -32,7 +32,10 @@ echo export ENV="$ENV"  >> /home/ec2-user/.bashrc
 #
 # password for mongodb cluster
 #
-export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep PASS | awk '{print $2}' | head -1 `" 
+# export PASS="`aws ec2 describe-tags --region "us-west-2" --query 'Tags[].[Key,Value]' --output text | grep PASS | awk '{print $2}' | head -1 `" 
+
+
+export PASS="`aws ec2 describe-tags --region "us-west-2" --filters "Name=resource-id,Values=$AWS_INSTANCE_ID"  "Name=key,Values=PASS" --query 'Tags[].[Key,Value]' --output text | awk '{print $2}'`"
 
 
 echo Current pwd is $PASS
