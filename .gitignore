@@ -3,3 +3,4 @@ node/node_modules/
 node/package-lock.json
 *.pyc
 /.tern-project
+/.env
