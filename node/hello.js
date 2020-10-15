@@ -17,7 +17,7 @@ module.exports - app;
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
-var MongoClient = require('mongodb').MongoClient;
+//  var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
 var dbname = config.dbname;
 console.log ("[hello.js] database " + dbname + " used.");
@@ -61,7 +61,7 @@ app.route('/sources').get(function(req,res){
     sourcesPage.getSourcesPage(req, res);
 });
 
-app.route('/articles').get(function(req, res) {
+/*app.route('/articles').get(function(req, res) {
    console.log("starting nodejs code ");
    MongoClient.connect(url, function(err, client) {
        console.log("connection ok");
@@ -86,6 +86,8 @@ app.route('/articles').get(function(req, res) {
        );
    });
 });
+*/
+
 app.set('view engine', 'pug');
 // serve static files from the 'public' folder
 app.use(express.static(__dirname + '/public'));
