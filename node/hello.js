@@ -8,14 +8,14 @@ console.log("[hello.js]  environment detected: (should be PROD/TEST/DEV): ", env
 var config = require(`./config/${env}`);
 module.exports = config;
 
+var bodyParser = require("body-parser");
 var  session = require('express-session');
-
+const mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 module.exports - app;
 
-var session = require('express-session');
-var FileStore = require('session-file-store')(session);
+
 
 //  var MongoClient = require('mongodb').MongoClient;
 var url = config.db;
@@ -27,7 +27,47 @@ var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
 var sourcesPage = require('./routes/sources.js');
 
-var str = "";
+// configure session and file-store
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+app.use(session({
+    name: 'session-id',
+    secret: '12345-67890-09876-54321',
+    saveUnitialized: false,
+    resave: false,
+    store: new FileStore
+}));
+
+//Configuring Passport
+var passport = require('passport');
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+//Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+
+try {
+    // mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(url, { useNewUrlParser: true });
+  } catch (error) {
+    console.log('Unable to connect to the Server', url);
+}
+// MongoClient.connect(url, function(err, client) {
+const db = mongoose.connection;
+console.log('Connection established to', url);
+
+db.on('error', () => console.error('connection error:'));
+db.once('open', () => console.log('connection succesfull'));
+
 
 // edited from own workstation -> eclipse
 function formatDate(date) {
@@ -67,13 +107,7 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 // app.use(express.static(__dirname + '/views'));
 
-app.use(session({
-    name: 'session-id',
-    secret: '12345-67890-09876-54321',
-    saveUnitialized: false,
-    resave: false,
-    store: new FileStore
-}));
+
 
 app.set('views', __dirname + '/views');
 
@@ -209,19 +243,53 @@ app.get('/getarticles', (req, res) => {
   const {spawn} = require('child_process');
   const getartscmd = spawn('sh',['/home/ec2-user/Code/scholar/scripts/get_articles.sh']);
   getartscmd.stdout.on('data', (data) => {
-	  console.log(`get_articles.sh  stdout:\n${data}`);
+      console.log(`get_articles.sh  stdout:\n${data}`);
   });
 
   getartscmd.stderr.on('data', (data) => {
-	  console.error(`get_articles.sh stderr:\n${data}`);
+      console.error(`get_articles.sh stderr:\n${data}`);
   });
   getartscmd.on('exit', function (code, signal) {
-	  console.log('getartscmd process exited with ' +
-	              `code ${code} and signal ${signal}`);
+      console.log('getartscmd process exited with ' +
+                  `code ${code} and signal ${signal}`);
   });
   res.render('getarticles', {
    title: 'getarticles',
   });
+});
+
+
+/* GET login page. */
+app.get('/login', function(req, res) {
+  // Display the Login page with any flash message, if any
+  res.render('login', { message: req.flash('message') });
+});
+
+/* Handle Login POST */
+app.post('/login', passport.authenticate('login', {
+  successRedirect: '/articlez',
+  failureRedirect: '/login',
+  failureFlash : true 
+}));
+
+/* GET Registration Page */
+app.get('/signup', function(req, res){
+  res.render('register',{message: req.flash('message')});
+});
+
+/* Handle Registration POST */
+app.post('/signup', function(req, res) {
+      var username  = req.body.username;
+      var password = req.body.password;
+      
+      console.log('hello.js -> entered signup function');
+      passport.authenticate('signup')(
+              req, 
+              username,
+              password,
+              function (){ 
+                  console.log('het is gelukt');
+              }) ;  
 });
 
 app.use(auth);

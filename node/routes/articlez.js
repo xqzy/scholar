@@ -24,18 +24,7 @@ module.exports = {
   // A func that takes in two parameters `req` and `res` [request, response]
  getArticlezPage: function (req, res) {
     
-  try {
-    // mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
-    mongoose.connect(url, { useNewUrlParser: true });
-  } catch (error) {
-    console.log('Unable to connect to the Server', url);
-  }
-  // MongoClient.connect(url, function(err, client) {
-  const db = mongoose.connection;
-  console.log('Connection established to', url);
-  
-  db.on('error', () => console.error('connection error:'));
-  db.once('open', () => console.log('connection succesfull'));
+
   var Article = require('../models/articles');
   
   // some code here just to try that the ocnnection works, 
