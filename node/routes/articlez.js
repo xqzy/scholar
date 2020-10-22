@@ -1,8 +1,5 @@
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
-
-
 // article.js - route module to show single article information.
-//
 // obtain the environment variable to determine whether this is prod/test/dev
 var env = process.env.ENV || 'DEV';
 var config = require(`../config/${env}`);
@@ -10,15 +7,16 @@ var config = require(`../config/${env}`);
 var express = require('express');
 var router = express.Router();
 
-
 var url = config.db;
 var dbname = config.dbname;
+
+const moment = require('moment');
+const today = moment().startOf('day');
+const twodaysago  = moment(today).subtract(2, "days");
 var sortcriteria="date";
 var sourcefilter="MT";
 
-
 const mongoose = require('mongoose');
-
 
 module.exports = {
   // A func that takes in two parameters `req` and `res` [request, response]
@@ -27,23 +25,8 @@ module.exports = {
 
   var Article = require('../models/articles');
   
-  // some code here just to try that the ocnnection works, 
-  // i.e. that there we can write to the dbase.
-  //var newidd = new mongoose.mongo.ObjectID();
-  //var artikeltje = new Article ({
-//	  description: 'awesomeaaa', 
-	//  _id : newidd
-//  });
-//  artikeltje.save(function(err) {
- //   if (err) return handleError(err);
-    // saved
- // });
-  
 
-  
-  // const db = client.db(`${dbname}`);
-  // var articlecollection = db.collection('articles');
-    
+  // sorting function    
   // function to define how articles are to be sorted.....
   function compare (a, b) {
     if (sortcriteria == "score") {
@@ -65,13 +48,8 @@ module.exports = {
   return comparison
   }
   
-  
-  
-  // example  
   // fetch url to see whether there was a commond
-  //
-  // res.send(req.query.cmd);
-  // Function : Hide 
+   // Function : Hide 
   // 		set the "show" bit for an article to zero, so that it isn't shown.
   if (req.query.cmd == "hd") {
      // convert string to objectid for mongo
@@ -111,17 +89,37 @@ module.exports = {
            }
          });
        console.log('update: ',req.query.id, req.query.cmd); 
-   } else if (req.query.cmd == "sort") {
+   }
+  // setting the sorting criterium
+  //
+  else if (req.query.cmd == "sort") {
      sortcriteria = req.query.id;
      console.log ("setting sorting criterium to : ", sortcriteria);
    }
+  //
+  // setting the filter selection
+  //
    else if (req.query.cmd == "fltr") {
-     if (req.query.id.length !== 0) {
-       sourcefilter = {source: req.query.id};
-       console.log("setting source filter to :", sourcefilter);
-     } else {
+      // hier iets neer zetten over de datum filter -> 
+       // nog uitzoeken hoe datum van week gedaan kan worde
+       //
+       if(req.query.id=="tod") {
+           var tekst = twodaysago.format('YYYY/MM/DD');
+           var tekst1 = today.format('YYYY/MM/DD');
+          sourcefilter = {
+                  pubDate: {
+                    $lte: tekst1,
+                    $gte:tekst,
+                   }
+           };
+          sortcriteria="score";
+       }
+       else if  (req.query.id.length !== 0) {
+         sourcefilter = {source: req.query.id};
+         console.log("setting source filter to :", sourcefilter);
+       } else {
          sourcefilter = "MT";
-     }
+       }
    }
    // Find all articles
    var articlesPerPage = 20;
