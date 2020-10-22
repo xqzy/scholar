@@ -25,6 +25,7 @@ console.log `dbname  ${dbname}`;
 var aboutPage = require('./routes/about.js');
 var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
+var profilePage = require('./routes/profile.js');
 var sourcesPage = require('./routes/sources.js');
 
 // configure session and file-store
@@ -88,6 +89,10 @@ app.route('/about').get(function(req, res) {
 	aboutPage.getAboutPage(req, res);
 });
 
+app.route('/profile').get(function(req, res) {
+    profilePage.getProfilePage(req, res);
+});
+
 app.route('/article').get(function(req,res){
 	articlePage.getArticlePage(req, res);
 });
@@ -111,60 +116,43 @@ app.use(express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 
-function auth (req, res, next) {
-    console.log(req.session);
-    if (!req.session.user) {
-      var authHeader = req.headers.authorization;
-      if (!authHeader) {
-          var err = new Error('You are not authenticated!');
-          res.setHeader('WWW-Authenticate', 'Basic');              
-          err.status = 401;
-          next(err);
-          return;
-      }
-      var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-      var user = auth[0];
-      var pass = auth[1];
-      if (user == 'admin' && pass == 'password') {
-          req.session.user = 'admin';
-          next(); // authorized
-      } else {
-          var err = new Error('You are not authenticated!');
-          res.setHeader('WWW-Authenticate', 'Basic');              
-          err.status = 401;
-          next(err);
-      }
-    }
-    else {
-        if (req.session.user === 'admin') {
-            next();
-        }
-        else {
-            var err = new Error('You are not authenticated!');
-            err.status = 401;
-            next(err);
-        }
-    }
-  }
+function isLoggedIn(req, res, next) { 
+    if (req.user) {
+        next(); 
+    } else {
+    res.redirect("/login"); 
+    } 
+}
+
+
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/', (req, res) => {
    var titel = 'Homepage';
+   var username = "";
    if (env == 'TEST') {
      titel = 'TEST Homepage TEST';
    }
+   if (req.user) {
+       username = req.user.username;
+   }
    res.render('index', {
      title: titel,
+     username: username,
   });
 });
 
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
-app.get('/maint', (req, res) => {
+app.get('/maint', isLoggedIn,  (req, res) => {
    res.render('maint', {
      title: 'maint',
   });
 });
 
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/dbadmin', (req, res) => {
@@ -292,7 +280,6 @@ app.post('/signup', function(req, res) {
               }) ;  
 });
 
-app.use(auth);
 // code for the recommend functionality
 app.get('/recommend', (req, res) => {
   const {spawn} = require('child_process');
@@ -310,6 +297,7 @@ app.get('/recommend', (req, res) => {
      title: 'recommend',
   });
 });
+
 
 var server = app.listen(8080, function() {
   console.log(`Express running → PORT ${server.address().port}`);

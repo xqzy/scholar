@@ -22,7 +22,13 @@ html
             a.menu(href="/sources") Info Sources
           li.menu 
             a.menu(href="/maint") Maintenance
-          li.menu(style="float:right")
+          li.menu
             a.menu(href="about") About
+          if username
+            li.menu(style="float.right")
+              a.menu(href="/profile") #{username}
+          else
+            li.menu(style="float.right")
+              a.menu(href="/login") Login
        
       block content
