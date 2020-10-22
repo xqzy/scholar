@@ -44,20 +44,24 @@ teller = 0
 for article in articles:
    teller += 1;
    print "teller {teller}", teller;
-   score = 100
-   for sw in searchwords:
-     # analyse description of article
-     res = re.search(sw["match"], article["description"])
-     if (res):
-       score += sw["score"]
-     # analyse title of article
-     res = re.search(sw["match"], article["title"])
-     if (res):
-       score += 2*sw["score"]
+   
+   if article["score"] == 0:
+     score = 100
+     for sw in searchwords:
+       # analyse description of article
+       res = re.search(sw["match"], article["description"])
+       if (res):
+         score += sw["score"]
+       # analyse title of article
+       res = re.search(sw["match"], article["title"])
+       if (res):
+         score += 2*sw["score"]
 	
-   articlecol.update_one(
-     { "_id": article["_id"]},
-     { '$set': {"score": score}}
-   )
+   
+   
+     articlecol.update_one(
+       { "_id": article["_id"]},
+       { '$set': {"score": score}}
+     )
 print "Recommendation scores succesfully adjusted"
 
