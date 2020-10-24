@@ -124,8 +124,6 @@ function isLoggedIn(req, res, next) {
     } 
 }
 
-
-// app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/', (req, res) => {
    var titel = 'Homepage';
    var username = "";

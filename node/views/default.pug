@@ -20,11 +20,14 @@ html
             a.menu(href="/articlez") Reading Room
           li.menu
             a.menu(href="/sources") Info Sources
-          li.menu 
-            a.menu(href="/maint") Maintenance
+
           li.menu
             a.menu(href="about") About
+          // for authenticated users show the profile page, and the maintenance page if they are admins.
           if username
+            if admin
+              li.menu 
+                a.menu(href="/maint") Maintenance
             li.menu(style="float.right")
               a.menu(href="/profile") #{username}
           else
