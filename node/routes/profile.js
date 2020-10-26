@@ -15,9 +15,13 @@ module.exports = {
       if (req.user) {
           username = req.user.username;
           userisadmin = req.user.admin;
+          res.render('profile', {
+              title: 'Profile'
+          });
+      } else {
+          res.status(403);
+          res.render('403');
       }
-      res.render('profile', {
-          title: 'Profile'
-      });
+      
     } 
   }

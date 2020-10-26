@@ -25,7 +25,7 @@ describe('Front end page', function(){
 
 
 describe('Main Article page ', function(){
-  this.timeout(4000);
+  this.timeout(8000);
   it('article page exists', function(done){
     chai.request('http://localhost:8080')
     .get('/articlez')

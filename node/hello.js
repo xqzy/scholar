@@ -278,10 +278,11 @@ app.post('/signup', function(req, res) {
               function (err, newUser) { 
                   if (err) {
                     console.log('[hello.js] het neit is gelukt');
-                    aboutPage.getAboutPage(req, res);
+                    res.status(403);
+                    res.render('403', );
                   } else {
                     console.log('[hello.js] het s gelukt');
-                    profilePage.getProfilePage(req, res);
+                    res.render('registrationsuccessful');
                   }
               }) ;  
 });

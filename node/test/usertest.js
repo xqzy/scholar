@@ -28,13 +28,14 @@ describe('Profile  page', function(){
       chai.request('http://localhost:8080')
       .get('/profile')
       .end(function(err, res) {
-        res.should.have.status(401);
+        res.should.have.status(403);
         done();
       });
     });
   });
 
 describe('Signup page', function(){
+    this.timeout(6000);
     it('signup page exists', function(done){
       chai.request('http://localhost:8080')
       .get('/signup')
@@ -52,10 +53,12 @@ describe('Signup page', function(){
             'username': 'joe',
             'password':'joe',
         })
-        .end(function(error, response, body) {
+        .end(function(error, res, body) {
             if (error) {
                 done(error);
             } else {
+                res.should.be.html;
+                res.should.have.status(200);
                 done();
             }
         });
@@ -69,6 +72,32 @@ describe('Signup page', function(){
     }); 
   });
 
+describe('Profile  page2', function(){
+    this.timeout(4000)
+    it('profile page should exist when signed-in', function(done){
+        var agent = chai.request.agent('http://localhost:8080')
+        agent
+          .post('/signup')
+          .type('form')
+          .send({
+             'username': 'joe',
+             'password':'joe',
+          })
+        .then(function(res){
+            expect(res).to.have.cookie('sessionid');
+            return agent.get('/profile')
+              .then(function(res) {
+                  expect(res).to.have.status(200);
+              });
+        });
+     // .end(function(err, res) {
+ //       done();
+ //     });
+        done();
+        agent.close();   
+    });
+    
+  });
 
 
 
