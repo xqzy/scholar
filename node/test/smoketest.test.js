@@ -37,18 +37,7 @@ describe('Main Article page ', function(){
   });
 });
 
-describe('Deprecated Article page ', function(){
-    this.timeout(4000);
-    it('article page exists', function(done){
-    chai.request('http://localhost:8080')
-    .get('/articles')
-    .end(function(err, res) {
-      res.should.have.status(200);
-      res.should.be.html;
-      done();
-    });
-  });
-});
+
 
 describe('Maintenance page ', function(){
   it('maintenance page exists', function(done){

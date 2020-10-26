@@ -41,6 +41,7 @@ app.use(session({
 
 //Configuring Passport
 var passport = require('passport');
+var signup = require('./passport/signup');
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -269,12 +270,19 @@ app.post('/signup', function(req, res) {
       var password = req.body.password;
       
       console.log('hello.js -> entered signup function');
-      passport.authenticate('signup')(
+      console.log('[hello.js] username' + username + ' password' + password )
+      signup(
               req, 
               username,
               password,
-              function (){ 
-                  console.log('het is gelukt');
+              function (err, newUser) { 
+                  if (err) {
+                    console.log('[hello.js] het neit is gelukt');
+                    aboutPage.getAboutPage(req, res);
+                  } else {
+                    console.log('[hello.js] het s gelukt');
+                    profilePage.getProfilePage(req, res);
+                  }
               }) ;  
 });
 
