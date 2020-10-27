@@ -99,6 +99,45 @@ describe('Profile  page2', function(){
     });
     
   });
+//
+// function first signs-in, then signs-out and then checks whether the profile page returns an error
+// to show that the user is acutally signed-out....
 
-
+describe('signout function', function(){
+    this.timeout(4000)
+    it('signout should sign-out', function(done){
+        var agent = chai.request.agent('http://localhost:8080')
+        agent
+          .post('/login')
+          .type('form')
+          .send({
+             'username': 'joe',
+             'password':'joe',
+          })
+        .then(function(res){
+            //  expect(res).to.have.cookie('sessionid');
+            expect(res).to.have.status(200);
+            return agent.get('/logout')
+              .then(function(res) {
+                  expect(res).to.have.status(200);
+              });
+        })
+        .then(function(res){
+            //  expect(res).to.have.cookie('sessionid');
+            expect(res).to.have.status(200);
+            return agent.get('/profile')
+              .then(function(res) {
+                  expect(res).to.have.status(403);
+              });
+        });
+        
+        
+     // .end(function(err, res) {
+ //       done();
+ //     });
+        done();
+        agent.close();   
+    });
+    
+  })
 

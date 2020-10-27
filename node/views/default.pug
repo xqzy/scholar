@@ -20,7 +20,6 @@ html
             a.menu(href="/articlez") Reading Room
           li.menu
             a.menu(href="/sources") Info Sources
-
           li.menu
             a.menu(href="about") About
           // for authenticated users show the profile page, and the maintenance page if they are admins.
@@ -29,9 +28,10 @@ html
               li.menu 
                 a.menu(href="/maint") Maintenance
             li.menu(style="float.right")
-              a.menu(href="/profile") #{username}
+              a.menu(href="/profile") Welcome, #{username} 
+            li.menu(style="float.right")
+              a.menu(href="/logout") Logout  
           else
             li.menu(style="float.right")
               a.menu(href="/login") Login
-       
       block content

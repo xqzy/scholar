@@ -128,23 +128,34 @@ function isLoggedIn(req, res, next) {
 app.get('/', (req, res) => {
    var titel = 'Homepage';
    var username = "";
+   var userisadmin = false;
    if (env == 'TEST') {
      titel = 'TEST Homepage TEST';
    }
    if (req.user) {
        username = req.user.username;
+       userisadmin = req.user.admin;
    }
    res.render('index', {
      title: titel,
      username: username,
+     admin: userisadmin,
   });
 });
 
 
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 app.get('/maint', isLoggedIn,  (req, res) => {
-   res.render('maint', {
-     title: 'maint',
+    var username = "";
+    var userisadmin = false;
+    if (req.user) {
+        username = req.user.username;
+        userisadmin = req.user.admin;
+    } 
+    res.render('maint', {
+        title: 'maint',
+        username: username,
+        admin: userisadmin,
   });
 });
 

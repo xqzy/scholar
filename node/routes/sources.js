@@ -12,13 +12,20 @@ var router = express.Router();
 var url = config.db;
 var dbname = config.dbname;
 const mongoose = require('mongoose');
-//
+
+var username="";
+var userisadmin=false;//
+
 // // sources page route.
 
 
 module.exports = {
   // A func that takes in two parameters `req` and `res` [request, response]
   getSourcesPage: function (req, res) {
+    if (req.user) {
+          username = req.user.username;
+          userisadmin = req.user.admin;
+    }
     try {
       mongoose.connect(url,  { useNewUrlParser: true });
 //MongoClient.connect(url, function(err, client) {
@@ -55,6 +62,8 @@ module.exports = {
                     console.log(sourcelist);    
                     res.render('sources', {
                       title: 'Information Sources',
+                      username: username,
+                      admin: userisadmin,
                       'sourcelist': sourcelist.sort(compare)
                     });
                 }

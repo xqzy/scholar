@@ -1,13 +1,11 @@
 extends default
   
 block content
-  link(rel='stylesheet', href='/css/style.css')
-  
-  
+  link(rel='stylesheet', href='/css/style.css')  
   block navbar
     ul.menu
       li.menu
-        a.menu(href=`/articlez?cmd=fltr&id=tod`) New
+        a.menu(href=`/articlez?cmd=fltr&id=tod`) What's new
       li.menu
         a.menu(href=`/articlez?page=${prevpage}`) <--
       li.menu

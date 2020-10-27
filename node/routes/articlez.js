@@ -6,7 +6,8 @@ var config = require(`../config/${env}`);
 
 var express = require('express');
 var router = express.Router();
-
+var username="";
+var userisadmin=false;
 var url = config.db;
 var dbname = config.dbname;
 
@@ -24,7 +25,10 @@ module.exports = {
     
 
   var Article = require('../models/articles');
-  
+  if (req.user) {
+      username = req.user.username;
+      userisadmin = req.user.admin;
+  }
 
   // sorting function    
   // function to define how articles are to be sorted.....
@@ -160,6 +164,8 @@ module.exports = {
             res.render('articlez', {
                 'articlelist': fltrArticleResult.sort(compare),
                 title: 'IT Risk Reading Room',
+                username: username,
+                admin: userisadmin,
                 pagenum: pgNum,
                 nextpage: nxtPg,
                 prevpage:prvPg,
