@@ -1,9 +1,8 @@
 // use 'strict';
-
 require('dotenv').config()
-// the password to the database should be included in the environment variable
 pw = process.env.PASS;
-dbstr = "mongodb+srv://admin:" + pw + "\@scholar-cyx09.mongodb.net/test?retryWrites=true";
+databasename = 'scholarprod';
+dbstr = "mongodb+srv://admin:" + pw + "\@scholar-cyx09.mongodb.net/" + databasename + "?retryWrites=true";
 
 module.exports = {
   env: 'PROD',
