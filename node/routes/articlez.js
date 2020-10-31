@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 var username="";
 var userisadmin=false;
+var userauthenticated = false;
 var url = config.db;
 var dbname = config.dbname;
 
@@ -16,6 +17,7 @@ const today = moment().startOf('day');
 const twodaysago  = moment(today).subtract(2, "days");
 var sortcriteria="date";
 var sourcefilter="MT";
+var userhaslikedarticlebefore = false;
 
 const mongoose = require('mongoose');
 
@@ -25,9 +27,16 @@ module.exports = {
     
 
   var Article = require('../models/articles');
+  var User = require('../models/user');
+  
   if (req.user) {
       username = req.user.username;
       userisadmin = req.user.admin;
+      userauthenticated = true;
+  } else {
+      username = "";
+      userisadmin = false;
+      userauthenticated = false;
   }
 
   // sorting function    
@@ -58,17 +67,20 @@ module.exports = {
   if (req.query.cmd == "hd") {
      // convert string to objectid for mongo
      var refid = require('mongodb').ObjectID(req.query.id); 
-     // articlecollection.findOneAndUpdate(
+
+     // register in the article record, the counter and user of this like
+     // todo also verify that this record hadn't been liked before by the user....
+     
      Article.findOneAndUpdate(
        {_id:refid},  // query to find the record
-       {$set:{show:"0"}},    // update command
+       {$inc:{like: 1}},    // update command
        {},                  // options 
        function(err, object){
          if(err){
-           console.log('error in iupdate functin');
+           console.log('[articlez.js] : update article record : error in iupdate functin');
            console.warn(err.message);  // return err mess
          }else{
-           console.log(' object infomration below: ' , req.query.id);
+           console.log(' [articlez.js] : update article record : object information below: ' , req.query.id);
            console.dir(object);
          }
        });
@@ -78,21 +90,50 @@ module.exports = {
   // set the like bit for an article to one.
   if (req.query.cmd == "lk") {
     var refid = require('mongodb').ObjectID(req.query.id); 
-       // articlecollection.findOneAndUpdate(
-       Article.findOneAndUpdate(
-         {_id:refid},  // query to find the record
-         {$set:{like:"1"}},    // update command
-         {},                  // options 
-         function(err, object){
-           if(err){
-             console.log('error in iupdate functin');
-             console.warn(err.message);  // return err mess
-           }else{
-             console.log(' object infomration below: ' , req.query.id);
-             console.dir(object);
-           }
-         });
-       console.log('update: ',req.query.id, req.query.cmd); 
+
+    // register with the user, the like of this article with reference
+    //
+    userhaslikedarticlebefore = false;
+    User.find({username: username}, function (err, user) {
+        if (!(user[0].likes.includes(refid))) {
+            console.log('[articlez.js] liked detected which this user hasnt liked before');
+            User.findOneAndUpdate(
+                    {username: username},
+                    {$push: {"likes": refid}},
+                    {},  // no options,
+                    function(err, object){
+                        if(err){
+                          console.log('[articlez.js] : update user record : error in iupdate functin');
+                          console.warn(err.message);  // return err mess
+                        }else{
+                          console.log('[articlez.js] : update user record :  object information below: ' , req.query.id);
+                          console.dir(object);
+                        }
+                      }  
+            );
+            // articlecollection.findOneAndUpdate(
+            Article.findOneAndUpdate(
+              {_id:refid},  // query to find the record
+              {$inc:{like: 1}},    // update command
+              {},                  // options 
+              function(err, object){
+                if(err){
+                  console.log('error in iupdate functin');
+                  console.warn(err.message);  // return err mess
+                }else{
+                  console.log(' object infomration below: ' , req.query.id);
+                  console.dir(object);
+                }
+              });
+            // console.log('update: ',req.query.id, req.query.cmd); 
+            
+            
+            
+        }  // end of if loop (only updating likes of the user hasn't liked the article before.)
+      });
+    
+
+
    }
   // setting the sorting criterium
   //
@@ -169,6 +210,7 @@ module.exports = {
                 pagenum: pgNum,
                 nextpage: nxtPg,
                 prevpage:prvPg,
+                authenticated: userauthenticated,
             });
      } else {
             res.render('articlez', {

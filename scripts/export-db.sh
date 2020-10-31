@@ -1,10 +1,20 @@
 #!/bin/sh
+# 
+# this script dumpts the database (test or dev) and copies to the S3 bucket
+# 
+# usage : not often, only when a new, crafted testset needs to be created and saved, for testing purpose.
+#
+# changes
+#       date        Change
+#       31-10-2020  correction of databasename.....
+# 
+
  
 . ./determine_environment
 
 if [ "$ENV" == "TEST" ]
 then
-  DB="test"
+  DB="scholar"
   BUCKET="thirtyfourtest"
 fi
 

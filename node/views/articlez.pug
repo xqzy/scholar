@@ -35,11 +35,16 @@ block content
               td=item.source
               td(width='4%')
                 a(href=`/articlez?cmd=hd&id=${item._id}`) 
-                  i.fa.fa-trash          
-                a(href=`/articlez?cmd=lk&id=${item._id}`) 
-                  if (item.like == 1)
-                    i.fa.fa-heart
-                  else
+                  i.fa.fa-trash 
+                if (authenticated)
+                    a(href=`/articlez?cmd=lk&id=${item._id}`) 
+                        if (item.like >= 1)
+                            i.fa.fa-heart #{item.like}
+                        else
+                            i.fa.fa-heart-o
+                else if (item.like >= 1)
+                    i.fa.fa-heart #{item.like}
+                else
                     i.fa.fa-heart-o
               td=item.score
               td=item.pubDate
