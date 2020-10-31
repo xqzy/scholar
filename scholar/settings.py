@@ -24,6 +24,15 @@ BOT_NAME = 'scholar'
 SPIDER_MODULES = ['scholar.spiders']
 NEWSPIDER_MODULE = 'scholar.spiders'
 
+#
+# RS added to deal iwth 429 responses 31-10-2020
+# two statements below...
+RETRY_HTTP_CODES = [429]
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    'scholar.middlewares.TooManyRequestsRetryMiddleware': 543,
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scholar (+http://www.yourdomain.com)'

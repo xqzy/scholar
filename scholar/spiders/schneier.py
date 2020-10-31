@@ -8,7 +8,7 @@ import datetime
 class Spider(XMLFeedSpider):
     name = "schneier"
     allowed_domains = ["schneier.com"]
-    start_urls = ['https://www.schneier.com/feed']    #Crawl BPMX
+    start_urls = ['https://www.schneier.com/feed/atom']    #Crawl BPMX
     namespaces = [('n', 'http://www.w3.org/2005/Atom')]
     itertag = 'n:entry'
     iterator = 'xml'

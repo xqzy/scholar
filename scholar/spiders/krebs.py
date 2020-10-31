@@ -62,6 +62,7 @@ class Spider(XMLFeedSpider):
         
         # self.logger.info('INFO Spider: url is %s', page )
         if (page.find("krebs")>=0): item['source']="Krebs"
+        elif (page.find("bankinfo")>=0): item['source']="Bankinfo Security"
         elif (page.find("watchdog")>=0): item['source']="Watchdog"
         elif (page.find("shostack")>=0): item['source']="Shostack"
         elif (page.find("kaminsky")>=0): item['source']="Kaminsky"
