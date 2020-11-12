@@ -22,7 +22,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - cd ~/Code/scholar/node && pm2 restart hello.js && npm test
+      - pm2 start hello.js 
+      - npm test
   post_build:
     commands:
       - echo Nothing to do postbuildtt
