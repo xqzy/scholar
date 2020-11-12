@@ -22,7 +22,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - pm2 start hello.js 
+      - pm2 start Code/scholar/node/hello.js 
       - npm test
   post_build:
     commands:
