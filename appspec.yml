@@ -9,9 +9,9 @@ hooks:
       timeout: 300 
       runas: root 
   AfterInstall:
-    - location: scripts/ls
+    - location: scripts/install-node-stuff.sh
       timeout: 300 
-      runas: root 
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/start-app.sh
       timeout: 300
