@@ -22,13 +22,13 @@ class Spider(XMLFeedSpider):
                   'https://www.risk.net/feeds/rss/category/risk-management/operational-risk',
                   'https://www.wired.com/category/security/feed',
                   'https://www.techrepublic.com/rssfeeds/topic/security/',
-                  'https://www.computerweekly.com/rss/IT-security.xml'
+
                   
                    ]    #Crawl BPMX
     itertag = 'item'
 
     def parse_node(self, response, node):
-        # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
+        self.logger.debug ('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
         page = response.url
         
         item = ScholarItem() 
@@ -37,22 +37,20 @@ class Spider(XMLFeedSpider):
         
         
         
+        temp = node.xpath('description/text()')
+        if (temp):
+            item['description'] = temp.extract_first()
+        else:
+            item['description'] = "N/A"
         
         
-        # determine the description. Field is not always gather the same way for all feeds.
-        if (page.find("schneier")>=0): 
-            print "#########################Schneier article found"
-            item['description'] = remove_tags(node.xpath('summary/text()').extract_first()) 
-            date_time_str = node.xpath('published/text()').extract_first()
-        else: 
-            item['description'] = remove_tags(node.xpath('description/text()').extract_first())                #define XPath for description
-            date_time_str = node.xpath('pubDate/text()').extract_first()
+        date_time_str = node.xpath('pubDate/text()').extract_first()
         
-        
+
         date_time_str = date_time_str.split(" ")
         date_time_str.pop()
         date_time_str = " ".join(date_time_str)
-        print date_time_str
+        self.logger.info ('Timestamp %s', date_time_str)
         date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S')
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')
@@ -76,6 +74,5 @@ class Spider(XMLFeedSpider):
         elif (page.find("risk.net")>=0): item['source']="Risk.net"
         elif (page.find("wired")>=0): item['source']="Wired"
         elif (page.find("techrepublic")>=0): item['source']="Techrepublic"
-        elif (page.find("computerweekly")>=0): item['source']="Computerweekly"
         item['like'] = 0
         yield item

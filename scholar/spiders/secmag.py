@@ -23,7 +23,7 @@ class Spider(XMLFeedSpider):
         date_time_str = date_time_str.split(" ")
         date_time_str.pop()
         date_time_str = " ".join(date_time_str)
-        print date_time_str
+        
         date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S')
 
         item['pubDate'] = date_time_obj.strftime('%Y/%m/%d')

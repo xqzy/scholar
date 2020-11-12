@@ -16,19 +16,15 @@ class Spider(XMLFeedSpider):
 
     def parse_node(self, response, node):
         # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
-        print "#########################Schneier article found"
         response.selector.remove_namespaces()
         page = response.url
         
         item = ScholarItem() 
         item['title'] = node.xpath('n:title/text()',).extract_first()                #define XPath for title
-        
-        # temp remove link (mightbe causing errors)
-        
         item['link'] = node.xpath('n:link/@href').extract_first()
         
         # determine the description. Field is not always gather the same way for all feeds.
-        print "#########################Schneier article found"
+        
         item['description'] = remove_tags(node.xpath('n:summary/text()').extract_first()) 
         
         # get the right date

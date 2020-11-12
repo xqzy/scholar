@@ -1,9 +1,25 @@
-HOMEDIR=/home/ec2-user/Code/scholar
-if mongo < $HOMEDIR/scripts/mongo_delete_all_articles.$ENV
+#!/bin/bash
+if [ "$ENV" = "TEST" ] ;
 then
-  echo "Articles Successfully deleted from $ENV database"
-else
-	echo ERROR deleting articles in Mongodb
-	exit 1
+    HOMEDIR="/home/ec2-user/Code/scholar"
 fi
+
+if [ "$ENV" = "DEV" ];
+then
+    HOMEDIR="/home/rob/eclipse-workspace/scholar"
+fi
+
+
+if [ "$ENV" = "PROD" ];
+then
+    exit
+fi
+
+mongo mongodb+srv://scholar.cyx09.mongodb.net -u admin -p $PASS <<EOF
+use scholar
+db.articles.remove({})
+db.users.remove({})
+EOF
+
+
 

@@ -17,6 +17,7 @@ class Spider(XMLFeedSpider):
 
     def parse_node(self, response, node):
         # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
+        response.selector.remove_namespaces()
         page = response.url
     
         # this feed has only one pubdate for all articles....
@@ -24,7 +25,7 @@ class Spider(XMLFeedSpider):
         date_time_str = date_time_str.split(" ")
         date_time_str.pop()
         date_time_str = " ".join(date_time_str)
-        print date_time_str
+        # print date_time_str
         date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S')
         pubdatestr = date_time_obj.strftime('%Y/%m/%d')
         
@@ -34,12 +35,19 @@ class Spider(XMLFeedSpider):
         
         
         # determine the description. Field is not always gather the same way for all feeds.
+        # here the desciptoin is not always empty. Therefore a check is needed.
+        
         #3if (page.find("schneier")>=0): 
         #    print "#########################Schneier article found"
         #    item['description'] = remove_tags(node.xpath('summary/text()').extract_first()) 
         #    date_time_str = node.xpath('published/text()').extract_first()
         #else: 
-        item['description'] = remove_tags(node.xpath('description/text()').extract_first())                #define XPath for description
+        temp = node.xpath('description/text()')
+        if (temp):
+            item['description'] = temp.extract_first()
+        else:
+            item['description'] = "N/A"
+                           #define XPath for description
         item['score'] = 0
         item['show'] = 1
         item['pubDate'] = pubdatestr

@@ -1,2 +1,0 @@
-use dev
-db.scholar.deleteMany({})
