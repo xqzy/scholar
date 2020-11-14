@@ -17,11 +17,11 @@ AfterInstall:
     - location: scripts/install-node-stuff.sh
       timeout: 300
       runas: ec2-user 
-  ApplicationStart:
+ApplicationStart:
     - location: scripts/start-app.sh
       timeout: 300
       runas: root
-  ApplicationStop:
+ApplicationStop:
     - location: scripts/stop-app.sh
       timeout: 300 
       runas: root 
