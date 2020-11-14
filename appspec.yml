@@ -12,7 +12,7 @@ hooks:
   BeforeInstall:
     - location: scripts/remove_all_code
       timeout: 300 
-      runas: root 
+      runas: root
   ApplicationStart:
     - location: scripts/start-app.sh
       timeout: 300
