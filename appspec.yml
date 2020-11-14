@@ -20,3 +20,7 @@ hooks:
     - location: scripts/stop-app.sh
       timeout: 300 
       runas: root 
+  AfterInstall:
+    - location: scripts/install-node-stuff.sh
+      timeout: 300 
+      runas: ec2-user 
