@@ -9,10 +9,6 @@ permissions:
     group: ec2-user
     type: directory
 hooks:
-  BeforeInstall:
-    - location: scripts/remove_all_code
-      timeout: 300 
-      runas: root
   ApplicationStart:
     - location: scripts/start-app.sh
       timeout: 300
