@@ -1,2 +1,6 @@
 #!/bin/sh
-rm -rf /home/ec2-user/Code/scholar
+#rm -rf /home/ec2-user/Code/scholar
+#
+# nothing removd...
+#
+echo "nothing removed"
