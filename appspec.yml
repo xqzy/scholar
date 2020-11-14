@@ -1,29 +1,25 @@
---- 
-files: 
-  - 
+version: 0.0
+os: linux
+files:
+  - source: /
     destination: /home/ec2-user/Code/scholar
-    source: /
+permissions:
+  - object: /home/ec2-user/Code/scholar
+    owner: ec2-user
+    group: ec2-user
 hooks: 
+  BeforeInstall:
+    - location: scripts/remove_all_code.sh
+      runas: root
   AfterInstall: 
-    - 
-      location: scripts/install-node-stuff.sh
+    - location: scripts/install-node-stuff.sh
       runas: ec2-user
       timeout: 300
   ApplicationStart: 
-    - 
-      location: scripts/start-app.sh
+    - location: scripts/start-app.sh
       runas: root
       timeout: 300
   ApplicationStop: 
-    - 
-      location: scripts/stop-app.sh
+    - location: scripts/stop-app.sh
       runas: root
       timeout: 300
-os: linux
-permissions: 
-  - 
-    group: ec2-user
-    object: /home/ec2-user/Code/scholar
-    owner: ec2-user
-    type: directory
-version: 0.0
