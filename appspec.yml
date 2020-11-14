@@ -19,11 +19,6 @@ hooks:
       location: scripts/stop-app.sh
       runas: root
       timeout: 300
-  BeforeInstall: 
-    - 
-      location: scripts/remove_all_code.sh
-      runas: root
-      timeout: 300
 os: linux
 permissions: 
   - 
