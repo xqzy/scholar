@@ -11,10 +11,6 @@ hooks:
   BeforeInstall:
     - location: scripts/remove_all_code.sh
       runas: root
-  AfterInstall: 
-    - location: scripts/install-node-stuff.sh
-      runas: ec2-user
-      timeout: 300
   ApplicationStart: 
     - location: scripts/start-app.sh
       runas: root
