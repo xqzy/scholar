@@ -1,4 +1,5 @@
 #!/bin/sh
 #
-rm -rf /home/ec2-user/Code/scholar/*
+# rm -rf /home/ec2-user/Code/scholar/*
 #
+find /home/ec2-user/Code/scholar -exec rm -f {} \;
