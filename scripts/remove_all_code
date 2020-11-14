@@ -1,6 +1,4 @@
 #!/bin/sh
-rm -rf /home/ec2-user/Code/scholar
 #
-# nothing removd...
-# aanpassen
-echo "nothing removed"
+rm -rf /home/ec2-user/Code/scholar/
+#
