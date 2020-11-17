@@ -22,6 +22,7 @@ block content
           th 
             a(href=`/articlez?cmd=sort&id=source`) Source
           th 
+          th tags
           th
             a(href=`/articlez?cmd=sort&id=score`) Score
           th 
@@ -31,8 +32,11 @@ block content
         - var i=0;
         tbody
           each item, i in articlelist
+            //- this is to color odd rows different from even rows
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              //- the first colum shows the source of the article
               td=item.source
+              //- the second columns shos links to likes (if authenticated)
               td(width='4%')
                 a(href=`/articlez?cmd=hd&id=${item._id}`) 
                   i.fa.fa-trash 
@@ -46,6 +50,15 @@ block content
                     i.fa.fa-heart #{item.like}
                 else
                     i.fa.fa-heart-o
+              //-
+              //-    T  A  G  S
+              //-
+              //- now show that tags (but check first if there are any
+              if item.tags.length > 0
+                td=item.tags[0].tagName
+              else
+                td= none
+              //-    
               td=item.score
               td=item.pubDate
               td(width='20%')

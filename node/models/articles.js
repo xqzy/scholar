@@ -10,8 +10,20 @@ var articleSchema = mongoose.Schema({
     score : Number,
     link : String,
     like : Number,
+    tags : [{ tagName: String, tagWeight : Number}],
 });
- 
+
+articleSchema.methods.updateTags = function () {
+    // fetch registered tags collection
+    var Tag = require('../models/tags');
+    // remove all tags
+    this.tags.length = 0;
+    // for each tag in tagcollection
+    // search the article with the text and add tagg when necessary
+    this.tags=[{tagName: "ransomware" , tagWeight: 1}]
+    return true;
+}
+
  var Article = mongoose.model('Article', articleSchema);
  
  module.exports = Article;

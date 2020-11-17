@@ -27,6 +27,7 @@ var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
 var profilePage = require('./routes/profile.js');
 var sourcesPage = require('./routes/sources.js');
+var updateTags = require("./routes/maint-tags.js");
 
 // configure session and file-store
 var session = require('express-session');
@@ -232,6 +233,15 @@ app.get('/deletearticles', (req, res) => {
      title: 'deleterecords' + retstr,
   });
 });
+
+
+// 16/11/20 added RS
+// process to update tags of all articles.
+//
+app.get('/updatetags', (req, res) => {
+
+    updateTags(req, res);
+})
 
 // 16/3/19
 // revision as per issue #11: change exec in spawn child process as spawn better deals with large output from
