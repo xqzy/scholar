@@ -238,9 +238,10 @@ app.get('/deletearticles', (req, res) => {
 // 16/11/20 added RS
 // process to update tags of all articles.
 //
-app.get('/updatetags', (req, res) => {
+app.get('/updatetags', function(req, res) {
 
     updateTags(req, res);
+    articlezPage.getArticlezPage(req, res);
 })
 
 // 16/3/19

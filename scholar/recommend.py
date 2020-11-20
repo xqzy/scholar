@@ -45,7 +45,7 @@ for article in articles:
    teller += 1;
    print "teller {teller}", teller;
    
-   if article["score"] == 0:
+   if article["score"] == 0 and 'description' in article :
      score = 100
      for sw in searchwords:
        # analyse description of article

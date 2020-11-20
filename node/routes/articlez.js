@@ -142,7 +142,7 @@ module.exports = {
      console.log ("setting sorting criterium to : ", sortcriteria);
    }
   //
-  // setting the filter selection
+  // setting the filter selection on information source
   //
    else if (req.query.cmd == "fltr") {
       // hier iets neer zetten over de datum filter -> 
@@ -166,6 +166,23 @@ module.exports = {
          sourcefilter = "MT";
        }
    }
+   //
+  //  icode below for command FTAG -> show filtered tags
+   else if (req.query.cmd == "ftag"){
+     // first check if an id exists
+       if(req.query.id) {
+           
+           //  var query = {"tags.tagName":  "Ransomware"};
+           sourcefilter = {
+                   "tags.tagName": req.query.id,  
+           }
+       } 
+       // else -> the command is FTAG but the ID hasn't beenprovided
+       // do onthing, just show normal screen.
+       else {
+           sourcefilter = "MT";
+       }
+   }
    // Find all articles
    var articlesPerPage = 20;
    var pgNum = 0;
@@ -185,7 +202,8 @@ module.exports = {
    if ( sourcefilter !='MT') {
      var query = {$and :[ sourcefilter, {show:1}] };
    } else {
-       var query = {show:1};
+        var query = {show:1};
+        
    }
    //articlecollection.find(query).toArray(function(err, articleResult) {
    Article.find(query, function(err,  articleResult) {
