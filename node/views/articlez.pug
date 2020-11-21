@@ -55,7 +55,8 @@ block content
               //-
               //- now show that tags (but check first if there are any
               if item.tags.length > 0
-                td=item.tags[0].tagName
+                td
+                  a(href=`/articlez?cmd=ftag&id=${item.tags[0].tagName}`) #{item.tags[0].tagName}
               else
                 td= none
               //-    

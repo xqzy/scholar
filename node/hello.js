@@ -28,6 +28,8 @@ var articlezPage = require('./routes/articlez.js');
 var profilePage = require('./routes/profile.js');
 var sourcesPage = require('./routes/sources.js');
 var updateTags = require("./routes/maint-tags.js");
+var tagsPage = require("./routes/tags.js");
+
 
 // configure session and file-store
 var session = require('express-session');
@@ -106,6 +108,10 @@ app.route('/articlez').get(function(req,res){
 
 app.route('/sources').get(function(req,res){
     sourcesPage.getSourcesPage(req, res);
+});
+
+app.route('/tags').get(function(req,res){
+    tagsPage.getTagsPage(req,res);
 });
 
 

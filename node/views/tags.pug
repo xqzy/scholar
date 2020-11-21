@@ -1,0 +1,23 @@
+extends default
+
+
+block content
+  
+  div.container
+  
+  // a(href=`/sources?page=${prevpage}`)  "<--"
+     p: page: #{pagenum}
+     a(href=`/sources?page=${nextpage}`)  "-->"
+  // 
+  table
+    meta(content='text/html', charset='utf-8')
+    thead
+        tr
+          th Tag
+        - var i=0;
+        tbody
+          each tag, i in taglist
+            tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              td
+                a(href=`/articlez?cmd=ftag&id=${tag}`) #{tag}
+              
