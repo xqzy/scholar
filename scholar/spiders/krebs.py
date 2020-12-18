@@ -11,6 +11,7 @@ class Spider(XMLFeedSpider):
     start_urls = ['https://krebsonsecurity.com/feed',
                   'https://www.lastwatchdog.com/rss',
                   'https://adam.shostack.org/blog/rss',
+                  'https://www.volexity.com/blog/rss',
                   'https://dankaminsky.com/rss',
                   'https://www.grahamcluley.com/feed',
                   'https://www.hackingarticles.in/rss',
