@@ -6,3 +6,4 @@ scrapy crawl secmag
 scrapy crawl krebs
 scrapy crawl schneier
 scrapy crawl theregister
+scrapy crawl volexity

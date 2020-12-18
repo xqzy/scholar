@@ -64,6 +64,7 @@ class Spider(XMLFeedSpider):
         elif (page.find("bankinfo")>=0): item['source']="Bankinfo Security"
         elif (page.find("watchdog")>=0): item['source']="Watchdog"
         elif (page.find("shostack")>=0): item['source']="Shostack"
+        elif (page.find("volexity")>=0): item['source']="Volexity"
         elif (page.find("kaminsky")>=0): item['source']="Kaminsky"
         elif (page.find("cluley")>=0): item['source']="Cluley"
         elif (page.find("hackingarticles")>=0): item['source']="Hacking Articles"
