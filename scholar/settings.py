@@ -13,8 +13,8 @@ import os
 from decouple import config
 
 pw = config('PASS')
-
-if isinstance(pw, basestring):
+# changed basestr in str to make it compatible with python 3
+if isinstance(pw, str):
 	DUM = 'dum'
 else:
 	pw = 'dum'
