@@ -13,8 +13,8 @@ import logging
 
 settings=get_project_settings()
 
-print "server info ", settings.get('MONGODB_SERVER')
-print "port info   ", settings.get('MONGODB_PORT')
+print ("server info ", settings.get('MONGODB_SERVER'))
+print ("port info   ", settings.get('MONGODB_PORT'))
 
 
 try:
@@ -23,7 +23,7 @@ try:
       settings.get('MONGODB_PORT')
     )
 except pymongo.errors.ConnectionFailure, e:
-    print "Could not connect to database: %s " % e
+    print ("Could not connect to database: %s " % e)
 db=connection[settings.get('MONGODB_DB')]
 articlecol = db[settings.get('MONGODB_COLLECTION')]		
 
@@ -39,7 +39,7 @@ searchwords = [ { 'match': 'ATM', 'score': 12 },
               ]
 
 articles = articlecol.find()
-print "number of records found: ", articles.count()
+print ("number of records found: ", articles.count())
 teller = 0
 for article in articles:
    teller += 1;
@@ -63,5 +63,5 @@ for article in articles:
        { "_id": article["_id"]},
        { '$set': {"score": score}}
      )
-print "Recommendation scores succesfully adjusted"
+print ("Recommendation scores succesfully adjusted")
 
