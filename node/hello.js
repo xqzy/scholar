@@ -318,7 +318,7 @@ app.post('/signup', function(req, res) {
 // code for the recommend functionality
 app.get('/recommend', (req, res) => {
   const {spawn} = require('child_process');
-  const reccmd = spawn('python', ['/home/ec2-user/Code/scholar/scholar/recommend.py']);
+  const reccmd = spawn('python', ['/home/ec2-user/Code/scholar/scripts/recommend.sh']);
   
   reccmd.stdout.on('data', (data)=> {
     console.log(`recommend.py stdout:\n${data}`);

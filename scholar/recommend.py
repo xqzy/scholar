@@ -22,7 +22,7 @@ try:
       settings.get('MONGODB_SERVER'),
       settings.get('MONGODB_PORT')
     )
-except pymongo.errors.ConnectionFailure, e:
+except (pymongo.errors.ConnectionFailure) as e:
     print ("Could not connect to database: %s " % e)
 db=connection[settings.get('MONGODB_DB')]
 articlecol = db[settings.get('MONGODB_COLLECTION')]		
@@ -43,7 +43,7 @@ print ("number of records found: ", articles.count())
 teller = 0
 for article in articles:
    teller += 1;
-   print "teller {teller}", teller;
+   print ("teller {teller}", teller)
    
    if article["score"] == 0 and 'description' in article :
      score = 100
