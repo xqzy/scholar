@@ -30,7 +30,7 @@ class ScholarPipeline(object):
             # prior to entering a new record in the database, first
             # check whether an article with this data already exists.
             myquery = {"title": item['title']}
-            if = self.collection.count_documents(myquery) == 0:
+            if self.collection.count_documents(myquery) == 0:
               self.collection.insert_one(dict(item))
             #  # log.msg("Article added to MongoDB database!",
             #        level=log.DEBUG, spider=spider)
