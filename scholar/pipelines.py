@@ -27,10 +27,11 @@ class ScholarPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
+            # prior to entering a new record in the database, first
+            # check whether an article with this data already exists.
             myquery = {"title": item['title']}
-            rsults = self.collection.find(myquery)
-            if rsults.count() == 0:      
-              self.collection.insert(dict(item))
+            if = self.collection.count_documents(myquery) == 0:
+              self.collection.insert_one(dict(item))
             #  # log.msg("Article added to MongoDB database!",
             #        level=log.DEBUG, spider=spider)
             #else:
