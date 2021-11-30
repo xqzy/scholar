@@ -1,6 +1,11 @@
 // app.locals.basedir = '/home/ec2-user/Code/scholar/node';
 // article.js - route module to show single article information.
 // obtain the environment variable to determine whether this is prod/test/dev
+
+// added to ensure the en/decoder are globally known in the code.
+global.TextEncoder = require("util").TextEncoder;
+global.TextDecoder = require("util").TextDecoder;
+
 var env = process.env.ENV || 'DEV';
 var config = require(`../config/${env}`);
 
