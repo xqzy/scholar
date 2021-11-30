@@ -39,7 +39,7 @@ searchwords = [ { 'match': 'ATM', 'score': 12 },
               ]
 
 articles = articlecol.find()
-print ("number of records found: ", articles.count())
+print ("number of records found: ", articlecol.count_documents({}))
 teller = 0
 for article in articles:
    teller += 1;
