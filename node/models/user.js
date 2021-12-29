@@ -23,6 +23,7 @@ var UserSchema = mongoose.Schema({
     email: String,
     likes : [mongoose.Schema.Types.ObjectId],
     tagsliked : [String],
+    sourcesliked:[String],
     firstName: String,
     lastName: String
 });

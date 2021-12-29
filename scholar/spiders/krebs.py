@@ -9,12 +9,14 @@ class Spider(XMLFeedSpider):
     name = "krebs"
     allowed_domains = ["krebsonsecurity.com"]
     start_urls = ['https://krebsonsecurity.com/feed',
+                  'https://www.bankinfosecurity.com/rss-feeds',
                   'https://www.lastwatchdog.com/rss',
                   'https://adam.shostack.org/blog/rss',
                   'https://dankaminsky.com/rss',
                   'https://www.grahamcluley.com/feed',
                   'https://www.hackingarticles.in/rss',
                   'https://marcoramilli.com/rss',
+                  'https://nakedsecurity.sophos.com/feed',
                   'https://www.schneier.com/feed/rss2',
                   'https://danielmiessler.com/feed/',
                   'https://www.darkreading.com/rss_simple.asp',
@@ -22,6 +24,9 @@ class Spider(XMLFeedSpider):
                   'https://www.risk.net/feeds/rss/category/risk-management/operational-risk',
                   'https://www.wired.com/category/security/feed',
                   'https://www.techrepublic.com/rssfeeds/topic/security/',
+                  'https://www.bleepingcomputer.com/feed/',
+                  'https://www.welivesecurity.com/feed',
+                  'https://www.zdnet.com/topic/security/rss.xml',
 
                   
                    ]    #Crawl BPMX
@@ -67,6 +72,7 @@ class Spider(XMLFeedSpider):
         elif (page.find("cluley")>=0): item['source']="Cluley"
         elif (page.find("hackingarticles")>=0): item['source']="Hacking Articles"
         elif (page.find("marcoramilli")>=0): item['source']="Ramilli"
+        elif (page.find("nakedsecurity")>=0): item['source']="Naked Security"
         elif (page.find("schneier")>=0): item['source']="Schneier"
         elif (page.find("miessler")>=0): item['source']="Miessler"
         elif (page.find("InfosecBlog")>=0): item['source']="InfoSecBlog"
@@ -74,5 +80,8 @@ class Spider(XMLFeedSpider):
         elif (page.find("risk.net")>=0): item['source']="Risk.net"
         elif (page.find("wired")>=0): item['source']="Wired"
         elif (page.find("techrepublic")>=0): item['source']="Techrepublic"
+        elif (page.find("bleeping")>=0): item['source']="Bleeping Computer"
+        elif (page.find("welivesec")>=0): item['source']="We Live Security"
+        elif (page.find("zdnet")>=0): item['source']="ZDNet"
         item['like'] = 0
         yield item

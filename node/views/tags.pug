@@ -1,23 +1,24 @@
 extends default
 
-
 block content
-  
   div.container
-  
-  // a(href=`/sources?page=${prevpage}`)  "<--"
-     p: page: #{pagenum}
-     a(href=`/sources?page=${nextpage}`)  "-->"
-  // 
   table
     meta(content='text/html', charset='utf-8')
     thead
         tr
           th Tag
+          th Likes
         - var i=0;
         tbody
           each tag, i in taglist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
-              td
+              td(width='25px')
                 a(href=`/articlez?cmd=ftag&id=${tag}`) #{tag}
-              
+              td
+                if(authenticated)
+                  if (tagsliked.includes(tag))
+                    a(href=`/tags?cmd=utag&id=${tag}`)
+                      i.fa.fa-heart
+                  else
+                    a(href=`/tags?cmd=ltag&id=${tag}`)
+                      i.fa.fa-heart-o  

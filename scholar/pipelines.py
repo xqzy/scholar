@@ -32,10 +32,10 @@ class ScholarPipeline(object):
             myquery = {"title": item['title']}
             if self.collection.count_documents(myquery) == 0:
               self.collection.insert_one(dict(item))
-            #  # log.msg("Article added to MongoDB database!",
+            #  log.msg("Article added to MongoDB database!",
             #        level=log.DEBUG, spider=spider)
             #else:
-            #   # log.msg("Duplicate article : not added:"+item['title'],
+            #  log.msg("Duplicate article : not added:"+item['title'],
             #        level=log.DEBUG, spider=spider)
         return item
 

@@ -1,11 +1,11 @@
 #!/usr/bin/bash
-cd ~ec2-user
+cd /home/ec2-user
 
 # create virtual environment for scrapy
 echo $0  ": ### STEP  1 ### Creating environment"
 /usr/bin/python3 -m venv scrapy-env
 echo $0  : "### STEP 2 ###  Activating environment"
-source scrapy-env/bin/activate
+. scrapy-env/bin/activate
 echo $0  : "### STEP 3 ###  Installing Scrapy"
 pip install Scrapy
 echo $0  : "### STEP 4 ###  Installing Pymongo"
