@@ -4,7 +4,6 @@
 # SCript to search through articles and make recommendations (by scoring articles)
 
 import os
-from twisted.python.fakepwd import _UserRecord
 os.chdir('/home/ec2-user/Code/scholar/scholar')
 
 import pymongo
