@@ -6,7 +6,7 @@
 import os
 from twisted.python.fakepwd import _UserRecord
 os.chdir('/home/ec2-user/Code/scholar/scholar')
-
+import codecs   
 import pymongo
 import re
 from scrapy.utils.project import get_project_settings
@@ -66,6 +66,9 @@ for article in articles:
    if 'description' in article :
      score = 100
      for sw in searchwords:
+         # check hether the sw has the right type class
+       if type(sw["match"])==bytes:
+         sw["match"] = codecs.decode(sw["match"])
        # analyse description of article
        res = re.search(sw["match"], article["description"])
        if (res):
