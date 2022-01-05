@@ -8,7 +8,7 @@ var tagSchema = mongoose.Schema({
     label: String,
     searchString: String,
     hits: Number,
-    recentHits:Number,
+    recenthits:Number,
 });
  
  var Tag = mongoose.model('Tag', tagSchema);
