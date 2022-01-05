@@ -26,6 +26,7 @@ var aboutPage = require('./routes/about.js');
 var articlePage = require('./routes/article.js');
 var articlezPage = require('./routes/articlez.js');
 var profilePage = require('./routes/profile.js');
+var statsPage = require('./routes/stats.js');
 var sourcesPage = require('./routes/sources.js');
 var updateTags = require("./routes/maint-tags.js");
 var tagsPage = require("./routes/tags.js");
@@ -105,6 +106,9 @@ app.route('/articlez').get(function(req,res){
 	articlezPage.getArticlezPage(req, res);
 });
 
+app.route('/stats').get(function(req,res){
+    statsPage.getStatsPage(req, res);
+});
 
 app.route('/sources').get(function(req,res){
     sourcesPage.getSourcesPage(req, res);
@@ -139,6 +143,10 @@ app.get('/', (req, res) => {
    if (env == 'TEST') {
      titel = 'TEST Homepage TEST';
    }
+   if (env == 'DEV' ) {
+       titel=" DEV DEV DEV DEV DEV";
+   }
+       
    if (req.user) {
        username = req.user.username;
        userisadmin = req.user.admin;
@@ -318,7 +326,7 @@ app.post('/signup', function(req, res) {
 // code for the recommend functionality
 app.get('/recommend', (req, res) => {
   const {spawn} = require('child_process');
-  const reccmd = spawn('python', ['/home/ec2-user/Code/scholar/scripts/recommend.sh']);
+  const reccmd = spawn('bash', ['/home/ec2-user/Code/scholar/scripts/recommend.sh']);
   
   reccmd.stdout.on('data', (data)=> {
     console.log(`recommend.py stdout:\n${data}`);

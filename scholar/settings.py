@@ -120,7 +120,8 @@ MONGODB_PORT = 27017
 MONGODB_COLLECTION = "articles"
 MONGODB_USERS = "users"
 MONGODB_TAGS = "tags"
-
+if (env == "DEV"):
+	MONGODB_DB = "scholardev"
 if (env == "TEST"):
 	MONGODB_DB = "scholar"
 if (env == "PROD"):

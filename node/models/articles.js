@@ -14,7 +14,8 @@ var articleSchema = mongoose.Schema({
 });
 
 articleSchema.methods.updateTags = function (tagarray, err, done) {
-
+    // this method reviews the text of the article (description) and  makes any mathces with existing tags
+    // of such matches exists, the corresponding tags will be added to the article.
     
     // fetch registered tags collection
     var i=0;
@@ -35,14 +36,17 @@ articleSchema.methods.updateTags = function (tagarray, err, done) {
                     var r= this.description.search(tagarray[i].searchString);
                     if ( r!= -1) {
                         // and insert a new tag to the article, when something is found.
-                        console.log('article.js: inserted tag' + tagarray[i].label + ' in article ' + this._id);
-                        this.tags.push({tagName: tagarray[i].label, tagWeight: 1})
-                        
+                        console.log('models/articles.js: inserted tag' + tagarray[i].label + ' in article ' + this._id);
+                        this.tags.push({tagName: tagarray[i].label, tagWeight: 1})         
                     } else {
-                        var r=this.title.search(tagarray[i].searchString);
-                        if (r!=-1) {
-                            console.log('article.js: inserted tag' + tagarray[i].label + ' in article ' + this._id);
-                            this.tags.push({tagName: tagarray[i].label, tagWeight: 1})
+                        // if nothing is found in the description o fthe article, we are going to search the title
+                        if (this.title) {
+                            var r=this.title.search(tagarray[i].searchString);
+                            if (r!=-1) {
+                                console.log('models/articles.js: inserted tag' + tagarray[i].label + ' in article ' + this._id);
+                                this.tags.push({tagName: tagarray[i].label, tagWeight: 1})
+                                
+                            }
                                 
                         }
                     }

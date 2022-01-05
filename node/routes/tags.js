@@ -64,6 +64,8 @@ function obtain_tagslikedarray(userauthenticated, callback){
              if ( !(user[0].tagsliked  === undefined) && Array.isArray(user[0].tagsliked) && user[0].tagsliked.length) {
                  callback(Array.from(user[0].tagsliked))
                  // console.log("[routes/tags.js] message 3", tagsliked);
+             } else {
+                 callback(tagsliked);
              }
              // return tagsliked;
          })  // end User.find    
