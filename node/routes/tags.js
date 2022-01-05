@@ -39,9 +39,9 @@ function obtain_tag_array(labellist, callback){
             callback(labellist);
         } else {
             
-            // first trim down the taglist and filter out only the "label" component.
+            // first trim down the taglist 
             for (var i  = 0; i < tagarray.length; i++) {
-                 labellist.push(tagarray[i].label);
+                 labellist.push(tagarray[i]);
             };
            callback(labellist);
         }

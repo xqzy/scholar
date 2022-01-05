@@ -7,13 +7,15 @@ block content
     thead
         tr
           th Tag
-          th Likes
+          th Like
+          th Recent Hits
+          th Total # Articles
         - var i=0;
         tbody
           each tag, i in taglist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
               td(width='25px')
-                a(href=`/articlez?cmd=ftag&id=${tag}`) #{tag}
+                a(href=`/articlez?cmd=ftag&id=${tag}`) #{tag.label}
               td
                 if(authenticated)
                   if (tagsliked.includes(tag))
@@ -22,3 +24,5 @@ block content
                   else
                     a(href=`/tags?cmd=ltag&id=${tag}`)
                       i.fa.fa-heart-o  
+              td #{tag.recenthits}
+              td #{tag.hits}
