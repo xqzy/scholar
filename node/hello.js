@@ -313,9 +313,9 @@ app.post('/signup', function(req, res) {
               password,
               function (err, newUser) { 
                   if (err) {
-                    console.log('[hello.js] het neit is gelukt');
+                    console.log('[hello.js] het niet is gelukt');
                     res.status(403);
-                    res.render('403', );
+                    res.render('403' );
                   } else {
                     console.log('[hello.js] het s gelukt');
                     res.render('registrationsuccessful');
@@ -327,7 +327,6 @@ app.post('/signup', function(req, res) {
 app.get('/recommend', (req, res) => {
   const {spawn} = require('child_process');
   const reccmd = spawn('bash', ['/home/ec2-user/Code/scholar/scripts/recommend.sh']);
-  
   reccmd.stdout.on('data', (data)=> {
     console.log(`recommend.py stdout:\n${data}`);
 //    console.log(`${stderr}`);

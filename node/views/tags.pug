@@ -15,14 +15,14 @@ block content
           each tag, i in taglist
             tr(class=(i % 2 == 0) ? 'odd' : 'even')
               td(width='25px')
-                a(href=`/articlez?cmd=ftag&id=${tag}`) #{tag.label}
+                a(href=`/articlez?cmd=ftag&id=${tag.label}`) #{tag.label}
               td
                 if(authenticated)
-                  if (tagsliked.includes(tag))
-                    a(href=`/tags?cmd=utag&id=${tag}`)
+                  if (tagsliked.includes(tag.label))
+                    a(href=`/tags?cmd=utag&id=${tag.label}`)
                       i.fa.fa-heart
                   else
-                    a(href=`/tags?cmd=ltag&id=${tag}`)
+                    a(href=`/tags?cmd=ltag&id=${tag.label}`)
                       i.fa.fa-heart-o  
               td #{tag.recenthits}
               td #{tag.hits}
