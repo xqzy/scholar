@@ -82,7 +82,8 @@ for user in users:
   # there is no teration here, as there is onl one user
   likedtags = user["tagsliked"]
   for likedtag in likedtags:
-    myquery = {"label" : likedtag}
+    print ("liketag found: ", likedtag["label"])
+    myquery = {"label" : likedtag["label"]}
     tags=tagtable.find(myquery)
     for tag in tags:
       print("next tag: ", tag["label"])
