@@ -85,6 +85,8 @@ for user in users:
     myquery = {"label" : likedtag}
     tags=tagtable.find(myquery)
     for tag in tags:
+      print("next tag: ", tag["label"])
+      print("searchstring:", tag["searchString"])
       searchword= {'match': tag["searchString"].encode('ascii','ignore'), 'score': 12}
       searchwords.append(searchword)
       # reset this hitcounter of the tag, so it can be recalculated
