@@ -27,7 +27,7 @@ class Spider(XMLFeedSpider):
                   'https://www.bleepingcomputer.com/feed/',
                   'https://www.welivesecurity.com/feed',
                   'https://www.zdnet.com/topic/security/rss.xml',
-
+                  'https://www.lightbluetouchpaper.org/feed',
                   
                    ]    #Crawl BPMX
     itertag = 'item'
@@ -83,5 +83,6 @@ class Spider(XMLFeedSpider):
         elif (page.find("bleeping")>=0): item['source']="Bleeping Computer"
         elif (page.find("welivesec")>=0): item['source']="We Live Security"
         elif (page.find("zdnet")>=0): item['source']="ZDNet"
+        elif (page.find("lightblue")>=0): item['source']="University of Cambridge"
         item['like'] = 0
         yield item

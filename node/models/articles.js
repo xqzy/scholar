@@ -47,7 +47,7 @@ articleSchema.methods.updateTags = function (tagarray, err, done) {
                                 this.tags.push({tagName: tagarray[i].label, tagWeight: 1})
                                 
                             }
-                                
+                                                           
                         }
                     }
              }  //for

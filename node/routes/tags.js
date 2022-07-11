@@ -16,7 +16,7 @@ var tagsliked = [""];
 
 // definition of functions 
 function compare (a,b){
-    if (a >  b) {
+    if (a["label"] >  b["label"]) {
         comparison = 1;
     } else  {
         comparison = -1;

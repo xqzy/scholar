@@ -50,8 +50,8 @@ searchwords=[]
 #                { 'match': 'risk management', 'score': 12 },
 #                { 'match': '[Ff]inancial [Ss]ervices', 'score': 12 }
 #              ]
-myquery = {"username" : "rob"}
-users = usertable.find(myquery)
+# myquery = {'username' : 'rob'}
+users = usertable.find({})
 tags=tagtable.find({})
 
 # this first part is to calculate statistics
@@ -78,12 +78,13 @@ for tag in tags:
     
     # print ("af", artsfound.count())
 for user in users:
-  # print ("user: ", user)
-  # there is no teration here, as there is onl one user
+  print ("user", user["username"])
+  # there is no iteration here, as there is onl one user
   likedtags = user["tagsliked"]
+  print("likedtags: ", likedtags)
   for likedtag in likedtags:
-    print ("liketag found: ", likedtag["label"])
-    myquery = {"label" : likedtag["label"]}
+    print ("liketag found: ", likedtag)
+    myquery = {"label" : likedtag}
     tags=tagtable.find(myquery)
     for tag in tags:
       print("next tag: ", tag["label"])
@@ -91,7 +92,8 @@ for user in users:
       searchword= {'match': tag["searchString"].encode('ascii','ignore'), 'score': 12}
       searchwords.append(searchword)
       # reset this hitcounter of the tag, so it can be recalculated
-
+  
+    
     
 print ("liked tags found: ", tags)
 print ("searchwords ", searchwords)
@@ -100,16 +102,43 @@ print ("searchwords ", searchwords)
 
 # now we cocluate scores for each of the tags liked. for this user
 
-articles = articlecol.find()
+articles = articlecol.find({
+  'pubDate' :  {'$gte' : recent_str}
+})
 print ("number of records found: ", articlecol.count_documents({}))
+print ("looking back at this date : ", recent_str)
 teller = 0
 for article in articles:
    teller += 1;
+   score = 100
    print ("teller {teller}", teller)
-   
+   print ("score: ", score)
+
+   # check whether the source is liked
+   if 'source' in article:
+     for ls in user["sourcesliked"]:
+       if(ls==article["source"]):
+         print ("liked source found: ", ls)
+         score += 12
+         print ("score: ", score)
+
    # if article["score"] == 0 and 'description' in article :
+   if 'title' in article and article["title"]:
+     print("title: ", article["title"])
+     print("date: ", article["pubDate"])
+     #analyse title of article
+     for sw in searchwords:
+       # print ("sw , ", sw)
+       # check hether the sw has the right type class
+       if type(sw["match"])==bytes:
+         sw["match"] = codecs.decode(sw["match"])
+       bes = re.search(sw["match"], article["title"])
+       if (bes):
+         score += 2*sw["score"]
+         print ("[recommend.py] hit searword in title")
+         print ("score: ", score)
    if 'description' in article :
-     score = 100
+     
      for sw in searchwords:
        # print ("sw , ", sw)
        # check hether the sw has the right type class
@@ -120,17 +149,11 @@ for article in articles:
        if (res):
          score += sw["score"]
          print ("[recommend.py] hit searchword ", sw["match"] )
-       if 'title' in article: 
-         # analyse title of article
-         bes = re.search(sw["match"], article["title"])
-         if (bes):
-           score += 2*sw["score"]
-           print ("[recommend.py] hit searword in title")
-       #else:
-       #  print ("dummy regel")  
-     articlecol.update_one(
+         print ("score: ", score)
+   print("final score:", score)
+   articlecol.update_one(
        { "_id": article["_id"]},
        { '$set': {"score": score}}
-     )
+   )
 print ("Recommendation scores succesfully adjusted")
 

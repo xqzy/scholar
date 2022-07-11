@@ -8,7 +8,7 @@ import datetime
 class Spider(XMLFeedSpider):
     name = "bankinfosec"
     allowed_domains = ["feeds.feedburner.com"]
-    start_urls = ['http://feeds.feedburner.com/bankinfosecurity/com']    #Crawl BPMX
+    start_urls = ['https://www.bankinfosecurity.com/rss-feeds']    #Crawl BPMX
     
     #
     
@@ -16,12 +16,13 @@ class Spider(XMLFeedSpider):
     itertag = 'item'
 
     def parse_node(self, response, node):
-        # self.logger.info('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
-        response.selector.remove_namespaces()
+        print ('Hi, this is a <%s> node!: %s', self.itertag, ''.join(node.extract()))
+        # response.selector.remove_namespaces()
         page = response.url
-    
+        print ("page ", page)
         # this feed has only one pubdate for all articles....
-        date_time_str = node.xpath('/rss/channel/pubDate/text()').extract_first()
+        date_time_str = response.xpath('/rss/channel/pubDate/text()').extract_first()
+        print (" dat time string", date_time_str)
         date_time_str = date_time_str.split(" ")
         date_time_str.pop()
         date_time_str = " ".join(date_time_str)
@@ -30,8 +31,8 @@ class Spider(XMLFeedSpider):
         pubdatestr = date_time_obj.strftime('%Y/%m/%d')
         
         item = ScholarItem() 
-        item['title'] = node.xpath('title/text()',).extract_first()                #define XPath for title
-        item['link'] = node.xpath('link/text()').extract_first()
+        item['title'] = response.xpath('title/text()',).extract_first()                #define XPath for title
+        item['link'] = response.xpath('link/text()').extract_first()
         
         
         # determine the description. Field is not always gather the same way for all feeds.
@@ -42,7 +43,7 @@ class Spider(XMLFeedSpider):
         #    item['description'] = remove_tags(node.xpath('summary/text()').extract_first()) 
         #    date_time_str = node.xpath('published/text()').extract_first()
         #else: 
-        temp = node.xpath('description/text()')
+        temp = response.xpath('description/text()')
         if (temp):
             item['description'] = temp.extract_first()
         else:
